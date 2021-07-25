@@ -8,7 +8,7 @@ interface Props {
 
 export const AnswerBubble: (props: Props) => JSX.Element | null = ({answer}) => {
   if(!answer) {
-    return null;
+    return <AnswerPlaceholder />;
   }
 
   return <BubbleContainer>
@@ -34,4 +34,10 @@ const AnswerTextContainer = styled.p`
   position: absolute;
   top: 10%;
   left: 10%;
+`;
+
+const AnswerPlaceholder = styled.div`
+  background-size: 100% 100%;
+  width: 100%;
+  min-height: 300px;
 `;
