@@ -3,91 +3,110 @@ import styled from 'styled-components';
 import { AnswersContainer } from './AnswersContainer';
 import { QuestionsContainer } from './QuestionsContainer';
 
-
 type QuestionWithAnswer = {
-  question: string;
-  answer: string;
-  time: Date;
-}
+    question: string;
+    answer: string;
+    time: Date;
+};
 
 export const ChatContainer = () => {
-  const [question, setQuestion] = useState<string>();
-  const [isThinking, setIsThinking] = useState<boolean>(false);
-  const [questionAnswerPairs, setQuestionAnswerPairs] = useState<QuestionWithAnswer[]>([]);
-  const handleSubmitQuestion = (submittedQuestion: string) => {
-    setIsThinking(true);
-    setTimeout(() => onThinkingComplete(submittedQuestion), 2500);
-  }
+    const [question, setQuestion] = useState<string>();
+    const [isThinking, setIsThinking] = useState<boolean>(false);
+    const [questionAnswerPairs, setQuestionAnswerPairs] = useState<QuestionWithAnswer[]>([]);
+    const handleSubmitQuestion = (submittedQuestion: string) => {
+        setIsThinking(true);
+        setTimeout(() => onThinkingComplete(submittedQuestion), 2500);
+    };
 
-  const onThinkingComplete = (submittedQuestion: string) => {
-    const answer = getAnswer(submittedQuestion);
-    setQuestionAnswerPairs([...questionAnswerPairs, { question: submittedQuestion, answer, time: new Date() }])
-    setQuestion('');
-    setIsThinking(false);
-  }
+    const onThinkingComplete = (submittedQuestion: string) => {
+        const answer = getAnswer(submittedQuestion);
+        setQuestionAnswerPairs([...questionAnswerPairs, { question: submittedQuestion, answer, time: new Date() }]);
+        setQuestion('');
+        setIsThinking(false);
+    };
 
-  const previousQuestions = questionAnswerPairs.map(qa => ({ message: qa.question, time: qa.time }));
-  const previousAnswers = questionAnswerPairs.map(qa => ({ message: qa.answer, time: qa.time }));
-  return <OuterContainer>
-    <QuestionLayoutContainer>
-      <QuestionsContainer 
-        onValueChange={setQuestion} 
-        value={question ?? ''} 
-        onSubmitQuestion={handleSubmitQuestion} 
-        isThinking={isThinking}
-        previousQuestions={previousQuestions} />
-    </QuestionLayoutContainer>
-    <AnswerLayoutContainer>
-      <AnswersContainer 
-        isAsking={!!question}
-        isThinking={isThinking}
-        previousAnswers={previousAnswers} />
-    </AnswerLayoutContainer>
-  </OuterContainer>;
-}
+    const previousQuestions = questionAnswerPairs.map((qa) => ({
+        message: qa.question,
+        time: qa.time,
+    }));
+    const previousAnswers = questionAnswerPairs.map((qa) => ({
+        message: qa.answer,
+        time: qa.time,
+    }));
+    return (
+        <OuterContainer>
+            <QuestionsContainer
+                onValueChange={setQuestion}
+                value={question ?? ''}
+                onSubmitQuestion={handleSubmitQuestion}
+                isThinking={isThinking}
+                previousQuestions={previousQuestions}
+            />
+            <AnswersContainer isAsking={!!question} isThinking={isThinking} previousAnswers={previousAnswers} />
+        </OuterContainer>
+    );
+};
 
 const OuterContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-`;
-
-const QuestionLayoutContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-const AnswerLayoutContainer = styled.div`
-  width: 100%;
-  height: 100%;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 3fr;
 `;
 
 function getAnswer(question: string): string {
-  if(!question) {
-    return '';
-  }
+    if (!question) {
+        return '';
+    }
 
-  let answer = undefined;
-  let questionKeywordIndex = 0;
-  const questionKeywords = question.split(' ').map(w => w.toLowerCase()).filter(w => w.length > 3 && !ignoredWords.includes(w))
-  while(!answer && questionKeywordIndex < questionKeywords.length) {
-    answer = answers.find(a => a.toLowerCase().includes(questionKeywords[questionKeywordIndex]));
-    questionKeywordIndex++;
-  }
+    // Find question keywords and match these against answer keywords,
+    // then return best suitable response, or alternatively a fallback response
+    const questionKeywords = question
+        .replace(punctuationRegex, '')
+        .split(' ')
+        .map((w) => w.toLowerCase());
 
-  return answer || 'Det ved jeg sgu ikke noget om.';
+    const ratedResponses = responses.map((a) => {
+        return {
+            ...a,
+            matchedKeywordCount: a.keywords.filter((kw) => questionKeywords.includes(kw)).length,
+        };
+    });
+
+    const highestScore = Math.max(...ratedResponses.map((a) => a.matchedKeywordCount));
+    const bestResponse = ratedResponses.find((a) => a.matchedKeywordCount === highestScore && a.matchedKeywordCount > 0);
+    if (bestResponse) return bestResponse.message;
+
+    return fallbackResponses[Math.floor(fallbackResponses.length * Math.random())];
 }
 
-const answers = [
-  'Anti-vaxxers skal dø!',
-  'Jeg elsker atomkraft. Jeg er jo ikke dum.',
-  'Tabular Editor er fantastisk',
-  'Kom så allesammen, gentag efter mig: Hva’ vil vi ha’? mRNA!',
-  'Dan Jørgensen er dælme sølle for en klimaminister. Stop nu idiotiet og lad videnskaben komme til.',
-  'Er du bange for at blive forgiftet med vaccinepartikler? Så gør som alle andre frie folk og tag mundbind på!',
-]
+const responses = [
+    { message: 'Anti-vaxxers skal dø!', keywords: ['vaxx', 'vaccine', 'vaxxer', 'corona', 'covid', 'antivaxxer', 'antivaxxers'] },
+    { message: 'Jeg elsker atomkraft. Jeg er jo ikke dum.', keywords: ['energi', 'klima', 'atomkraft'] },
+    { message: 'Tabular Editor er fantastisk', keywords: ['tabular', 'datamodel'] },
+    {
+        message: 'Kom så allesammen, gentag efter mig: Hva’ vil vi ha’? mRNA!',
+        keywords: ['vaxx', 'vaccine', 'vaxxer', 'corona', 'covid', 'mrna', 'genetik', 'antivaxxer', 'antivaxxers'],
+    },
+    {
+        message: 'Dan Jørgensen er dælme sølle for en klimaminister. Stop nu idiotiet og lad videnskaben komme til.',
+        keywords: ['klima', 'klimaminister', 'videnskab', 'politik', 'jørgensen', 'dan'],
+    },
+    {
+        message: 'Er du bange for at blive forgiftet med vaccinepartikler? Så gør som alle andre frie folk og tag mundbind på!',
+        keywords: ['vaxx', 'vaccine', 'vaxxer', 'corona', 'covid', 'mundbind', 'antivaxxer', 'antivaxxers'],
+    },
+];
 
-const ignoredWords: string[] = [
-  'skal', 'blive', 'med', 'alle', 'andre', 'stop', 'dælme', 'gentag', 'efter', 'ikke', 'dø'
-]
+const fallbackResponses = [
+    'Det ved jeg sgu ikke noget om.',
+    'Hvad er det for noget pis at fyre af?',
+    'Det ku du li at vide',
+    'Det er satme det dummeste jeg har hørt længe',
+    'Hold nu kæft',
+    'Spørg om noget andet',
+    'Hvorfor spørger du ikke om noget fornuftigt? Du spilder min tid.',
+];
+
+const punctuationRegex = /[.,/#!$%^&*;:{}=\-_`~()?]/g;

@@ -1,12 +1,9 @@
-import React from 'react'
-import './App.css'
-import { ChatContainer } from './ChatContainer'
+import React from 'react';
+import './App.css';
+import { ChatContainer } from './ChatContainer';
 
 function App() {
-
-  return (
-    <ChatContainer />
-  )
+    return <ChatContainer />;
 }
 
-export default App
+export default App;

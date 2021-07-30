@@ -1,0 +1,10 @@
+* Fix layout
+* Make animation for thinking bubble (see old ask-cookie solution)
+* Rename answer --> response
+* Experiment with tailwind to replace styled components?
+* Implement nice "chat message" component, ala sms, but with home painted bubbles?
+* Add gif to indicate that daniel is listening when the questioneer is typing
+* Add mechanism to display taunt message when questioneer is idling
+* Add new fav icon?
+* Add more actual responses. Pick from tabular editor video or facebook, or...?
+
