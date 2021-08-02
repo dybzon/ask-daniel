@@ -1,6 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import ThinkBubbleImg from './think-bubble-full.png';
+import styled, { keyframes } from 'styled-components';
+import thinkBubble1 from './think-bubble-1dot.png';
+import thinkBubble2 from './think-bubble-2dots.png';
+import thinkBubble3 from './think-bubble-3dots.png';
+import thinkBubble4 from './think-bubble-full.png';
 
 export const ThinkBubble = () => {
     return (
@@ -10,11 +13,21 @@ export const ThinkBubble = () => {
     );
 };
 
+const thinkBubbleAnimation = keyframes`
+  0% {background-image: url(${thinkBubble1});}
+  25% {background-image: url(${thinkBubble2});}
+  50% {background-image: url(${thinkBubble3});}
+  75% {background-image: url(${thinkBubble4});}
+`;
+
 const BubbleContainer = styled.div`
-    background-image: url('${ThinkBubbleImg}');
+    flex: 0 1 80%;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    animation: ${thinkBubbleAnimation} 1.2s linear infinite;
     position: relative;
+    width: 100%;
+    height: 100%;
 `;
 
 const TextContainer = styled.p`

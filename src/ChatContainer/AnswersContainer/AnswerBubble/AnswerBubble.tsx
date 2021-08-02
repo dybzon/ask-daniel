@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import BubbleImg from './answer-bubble.png';
-import DanielImg from './daniel1.png';
 
 interface Props {
     answer?: string;
@@ -14,9 +13,6 @@ export const AnswerBubble: (props: Props) => JSX.Element | null = ({ answer }) =
 
     return (
         <BubbleContainer>
-            <ImageContainer>
-                <StyledImage />
-            </ImageContainer>
             <AnswerTextContainer>{answer}</AnswerTextContainer>
         </BubbleContainer>
     );
@@ -27,20 +23,7 @@ const BubbleContainer = styled.div`
     background-repeat: no-repeat;
     background-size: 100% 100%;
     position: relative;
-`;
-
-const StyledImage = styled.div`
-    background-image: url('${DanielImg}');
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 300px;
-    height: 300px;
-    border-radius: 150px;
-`;
-
-const ImageContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
+    flex: 0 1 80%;
 `;
 
 const AnswerTextContainer = styled.p`
@@ -50,7 +33,6 @@ const AnswerTextContainer = styled.p`
 `;
 
 const AnswerPlaceholder = styled.div`
+    flex: 0 1 80%;
     background-size: 100% 100%;
-    width: 100%;
-    min-height: 300px;
 `;

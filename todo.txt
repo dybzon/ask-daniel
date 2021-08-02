@@ -1,5 +1,5 @@
 * Fix layout
-* Make animation for thinking bubble (see old ask-cookie solution)
+[X] Make animation for thinking bubble (see old ask-cookie solution)
 * Rename answer --> response
 * Experiment with tailwind to replace styled components?
 * Implement nice "chat message" component, ala sms, but with home painted bubbles?
@@ -8,3 +8,4 @@
 * Add new fav icon?
 * Add more actual responses. Pick from tabular editor video or facebook, or...?
 
+* Dynamic layout (mobile friendly)

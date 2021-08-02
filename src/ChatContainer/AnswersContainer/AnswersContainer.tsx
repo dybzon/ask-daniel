@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { AnswerBubble } from './AnswerBubble';
 import { ThinkBubble } from './ThinkBubble';
+import DanielImg from './daniel1.png';
 
 interface Props {
     isThinking: boolean; // Determines whether the oracle is currently thinking. No new questions can be asked while thinking.
@@ -22,7 +23,12 @@ export const AnswersContainer: (props: Props) => JSX.Element = ({ isAsking, isTh
 
     return (
         <>
-            <ResponseContainer>{isThinking ? <ThinkBubble /> : <AnswerBubble answer={currentAnswer} />}</ResponseContainer>
+            <ResponseContainer>
+                {isThinking ? <ThinkBubble /> : <AnswerBubble answer={currentAnswer} />}
+                <ImageContainer>
+                    <StyledImage />
+                </ImageContainer>
+            </ResponseContainer>
             <ChatContainer>
                 <ChatMessages messages={chatMessages} />
             </ChatContainer>
@@ -38,4 +44,19 @@ const ChatContainer = styled.div`
 const ResponseContainer = styled.div`
     grid-column-start: 2;
     grid-row-start: 1;
+    display: flex;
+    flex-direction: row;
+`;
+
+const StyledImage = styled.div`
+    background-image: url('${DanielImg}');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+`;
+
+const ImageContainer = styled.div`
+    flex: 0 1 20%;
 `;
