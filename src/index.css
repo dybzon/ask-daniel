@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'AmaticSC-Bold';
+    src: url('./AmaticSC-Bold.ttf') format('opentype');
+}
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -15,8 +20,10 @@ body,
 #root {
     width: 100%;
     height: 100%;
+    font-family: 'AmaticSC-Bold';
+    font-size: 28px;
 }
 
-div {
-    border: 1px solid red;
+textarea {
+    font-family: 'AmaticSC-Bold';
 }

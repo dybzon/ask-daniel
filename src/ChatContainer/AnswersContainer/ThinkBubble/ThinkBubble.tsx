@@ -25,13 +25,12 @@ const BubbleContainer = styled.div`
     background-repeat: no-repeat;
     background-size: 100% 100%;
     animation: ${thinkBubbleAnimation} 1.2s linear infinite;
-    position: relative;
     width: 100%;
     height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
-const TextContainer = styled.p`
-    position: absolute;
-    top: 10%;
-    left: 10%;
-`;
+const TextContainer = styled.p``;

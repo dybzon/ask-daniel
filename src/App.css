@@ -1,7 +1,6 @@
 .App,
 textarea,
 p {
-    border: 1px solid red;
     font-size: 28px;
     text-align: center;
 }

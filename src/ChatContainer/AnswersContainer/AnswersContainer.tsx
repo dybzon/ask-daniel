@@ -51,10 +51,12 @@ const ResponseContainer = styled.div`
 const StyledImage = styled.div`
     background-image: url('${DanielImg}');
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
+    background-position: center;
     width: 100%;
-    height: 100%;
+    height: 95%;
     border-radius: 50%;
+    border: 4px solid #404040;
 `;
 
 const ImageContainer = styled.div`

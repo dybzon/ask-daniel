@@ -16,7 +16,7 @@ export const ChatMessages: (props: Props) => JSX.Element = ({ messages }) => {
             {messages.map((m) => (
                 <MessageContainer key={m.time + m.message}>
                     <MessageTime>
-                        {m.time.getHours()}.{m.time.getMinutes()}:{m.time.getSeconds()}
+                        {getHours(m.time)}.{getMinutes(m.time)}
                     </MessageTime>
                     <Message>{m.message}</Message>
                 </MessageContainer>
@@ -34,18 +34,36 @@ const MessagesContainer = styled.div`
 `;
 
 const MessageContainer = styled.div`
-    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: start;
+    padding: 4px;
+    margin: 4px;
+    border: 4px solid #404040;
+    border-radius: 8px;
 `;
 
 const MessageTime = styled.div`
     width: 50px;
-    flex: 0 0 1;
     margin-right: 12px;
 `;
 
-const Message = styled.div`
-    flex: 1 1 1;
-`;
+const Message = styled.div``;
+
+function getHours(date: Date): string {
+    const hours = date.getHours();
+    if (hours < 10) {
+        return `0${hours}`;
+    }
+
+    return hours.toString();
+}
+
+function getMinutes(date: Date): string {
+    const minutes = date.getMinutes();
+    if (minutes < 10) {
+        return `0${minutes}`;
+    }
+
+    return minutes.toString();
+}

@@ -12,24 +12,27 @@ export const AnswerBubble: (props: Props) => JSX.Element | null = ({ answer }) =
     }
 
     return (
-        <BubbleContainer>
+        <Bubble>
             <AnswerTextContainer>{answer}</AnswerTextContainer>
-        </BubbleContainer>
+        </Bubble>
     );
 };
 
-const BubbleContainer = styled.div`
+const Bubble = styled.div`
     background-image: url('${BubbleImg}');
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    position: relative;
     flex: 0 1 80%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const AnswerTextContainer = styled.p`
-    position: absolute;
-    top: 10%;
-    left: 10%;
+    max-width: 80%;
+    max-height: 80%;
+    margin: 0;
 `;
 
 const AnswerPlaceholder = styled.div`
