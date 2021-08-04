@@ -1,9 +1,6 @@
-[X] Fix basic layout
-[X] Make animation for thinking bubble (see old ask-cookie solution)
 * Rename answer --> response
-[X] Add a less rigid font... more hand-written ish.
-[x] Fix time format on messages
 * Experiment with tailwind to replace styled components?
+* Experiment with ChakraUI? or another component/design system. E.g. materialUI.
 * Implement nice "chat message" component, ala sms, but with home painted bubbles? Make it more chatlike. All messages take up a full row,
 	but interviewers questions align right, and responses align left. Use different colors for question/response bubbles.
 * Add gif to indicate that daniel is listening when the questioneer is typing
