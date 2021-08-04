@@ -1,11 +1,7 @@
-* Rename answer --> response
 * Experiment with tailwind to replace styled components?
 * Experiment with ChakraUI? or another component/design system. E.g. materialUI.
-* Implement nice "chat message" component, ala sms, but with home painted bubbles? Make it more chatlike. All messages take up a full row,
-	but interviewers questions align right, and responses align left. Use different colors for question/response bubbles.
 * Add gif to indicate that daniel is listening when the questioneer is typing
 * Add mechanism to display taunt message when questioneer is idling
-* Add new fav icon?
 * Add more actual responses. Pick from tabular editor video or facebook, or...?
 * Create a new azure website and host the thing there...
 

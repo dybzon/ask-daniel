@@ -1,29 +1,16 @@
-import { ChatMessages } from '../ChatMessages';
 import React from 'react';
 import styled from 'styled-components';
 import BubbleImg from './question-bubble.png';
-import { ChatMessage } from '../ChatMessages';
 
 interface Props {
     onValueChange: (value: string) => void;
     onSubmitQuestion: (question: string) => void;
     value: string;
     isThinking: boolean; // Determines whether the oracle is currently thinking. No new questions can be asked while thinking.
-    previousQuestions: ChatMessage[];
+    lastQuestion?: string;
 }
 
-export const QuestionsContainer: (props: Props) => JSX.Element = ({ onValueChange, onSubmitQuestion, value, isThinking, previousQuestions }) => {
-    const chatMessages = [...previousQuestions];
-    let questionPlaceholder = '';
-    if (isThinking && value) {
-        questionPlaceholder = value;
-    } else if (!value && previousQuestions.length > 0) {
-        const latestMessage = chatMessages.pop();
-        if (latestMessage) {
-            questionPlaceholder = latestMessage.message;
-        }
-    }
-
+export const QuestionsContainer: (props: Props) => JSX.Element = ({ onValueChange, onSubmitQuestion, value, isThinking, lastQuestion }) => {
     const handleValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (isThinking) return;
         onValueChange(e.target.value);
@@ -36,14 +23,9 @@ export const QuestionsContainer: (props: Props) => JSX.Element = ({ onValueChang
     };
 
     return (
-        <>
-            <BubbleContainer>
-                <QuestionTextArea onChange={handleValueChange} autoFocus={true} onKeyDown={handleKeyDown} value={value} placeholder={questionPlaceholder} />
-            </BubbleContainer>
-            <ChatContainer>
-                <ChatMessages messages={chatMessages} />
-            </ChatContainer>
-        </>
+        <BubbleContainer>
+            <QuestionTextArea onChange={handleValueChange} autoFocus={true} onKeyDown={handleKeyDown} value={value} placeholder={lastQuestion} />
+        </BubbleContainer>
     );
 };
 
@@ -53,11 +35,6 @@ const BubbleContainer = styled.div`
     background-size: 100% 100%;
     grid-column-start: 1;
     grid-row-start: 1;
-`;
-
-const ChatContainer = styled.div`
-    grid-column-start: 1;
-    grid-row-start: 2;
 `;
 
 const QuestionTextArea = styled.textarea`

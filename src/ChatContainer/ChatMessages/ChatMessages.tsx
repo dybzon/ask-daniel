@@ -1,3 +1,4 @@
+import { QuestionWithAnswer } from '../ChatContainer';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -7,21 +8,39 @@ export interface ChatMessage {
 }
 
 interface Props {
-    messages: ChatMessage[];
+    messages: QuestionWithAnswer[];
 }
 
 export const ChatMessages: (props: Props) => JSX.Element = ({ messages }) => {
     return (
         <MessagesContainer>
             {messages.map((m) => (
-                <MessageContainer key={m.time + m.message}>
-                    <MessageTime>
-                        {getHours(m.time)}.{getMinutes(m.time)}
-                    </MessageTime>
-                    <Message>{m.message}</Message>
-                </MessageContainer>
+                <ChatMessagePair key={m.time.toString()} messages={m} />
             ))}
         </MessagesContainer>
+    );
+};
+
+const ChatMessagePair = ({ messages }: { messages: QuestionWithAnswer }) => {
+    return (
+        <>
+            <QuestionContainer>
+                <MessageWrapper>
+                    <MessageTime>
+                        {getHours(messages.time)}.{getMinutes(messages.time)}
+                    </MessageTime>
+                    <Message>{messages.question}</Message>
+                </MessageWrapper>
+            </QuestionContainer>
+            <ResponseContainer>
+                <MessageWrapper>
+                    <MessageTime>
+                        {getHours(messages.time)}.{getMinutes(messages.time)}
+                    </MessageTime>
+                    <Message>{messages.answer}</Message>
+                </MessageWrapper>
+            </ResponseContainer>
+        </>
     );
 };
 
@@ -33,14 +52,26 @@ const MessagesContainer = styled.div`
     justify-content: start;
 `;
 
-const MessageContainer = styled.div`
+const QuestionContainer = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: start;
-    padding: 4px;
+    justify-content: flex-start;
+`;
+
+const ResponseContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+`;
+
+const MessageWrapper = styled.div`
+    padding: 4px 12px;
     margin: 4px;
-    border: 4px solid #404040;
     border-radius: 8px;
+    max-width: 80%;
+    background-color: #404040;
+    color: white;
+    display: flex;
 `;
 
 const MessageTime = styled.div`

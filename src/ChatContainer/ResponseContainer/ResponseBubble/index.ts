@@ -1,0 +1,1 @@
+export { ResponseBubble } from './ResponseBubble';

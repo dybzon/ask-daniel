@@ -3,17 +3,17 @@ import styled from 'styled-components';
 import BubbleImg from './answer-bubble.png';
 
 interface Props {
-    answer?: string;
+    response?: string;
 }
 
-export const AnswerBubble: (props: Props) => JSX.Element | null = ({ answer }) => {
-    if (!answer) {
-        return <AnswerPlaceholder />;
+export const ResponseBubble: (props: Props) => JSX.Element | null = ({ response }) => {
+    if (!response) {
+        return <Placeholder />;
     }
 
     return (
         <Bubble>
-            <AnswerTextContainer>{answer}</AnswerTextContainer>
+            <TextContainer>{response}</TextContainer>
         </Bubble>
     );
 };
@@ -29,13 +29,13 @@ const Bubble = styled.div`
     justify-content: center;
 `;
 
-const AnswerTextContainer = styled.p`
+const TextContainer = styled.p`
     max-width: 80%;
     max-height: 80%;
     margin: 0;
 `;
 
-const AnswerPlaceholder = styled.div`
+const Placeholder = styled.div`
     flex: 0 1 80%;
     background-size: 100% 100%;
 `;

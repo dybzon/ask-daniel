@@ -1,38 +1,38 @@
+import { ChatMessages } from './ChatMessages';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { AnswersContainer } from './AnswersContainer';
+import { ResponseContainer } from './ResponseContainer';
 import { QuestionsContainer } from './QuestionsContainer';
 
-type QuestionWithAnswer = {
+export type QuestionWithResponse = {
     question: string;
-    answer: string;
+    response: string;
     time: Date;
 };
 
 export const ChatContainer = () => {
     const [question, setQuestion] = useState<string>();
     const [isThinking, setIsThinking] = useState<boolean>(false);
-    const [questionAnswerPairs, setQuestionAnswerPairs] = useState<QuestionWithAnswer[]>([]);
+    const [questionResponsePairs, setQuestionResponsePairs] = useState<QuestionWithResponse[]>([]);
     const handleSubmitQuestion = (submittedQuestion: string) => {
         setIsThinking(true);
         setTimeout(() => onThinkingComplete(submittedQuestion), 2500);
     };
 
     const onThinkingComplete = (submittedQuestion: string) => {
-        const answer = getAnswer(submittedQuestion);
-        setQuestionAnswerPairs([...questionAnswerPairs, { question: submittedQuestion, answer, time: new Date() }]);
+        const response = getResponse(submittedQuestion);
+        setQuestionResponsePairs([{ question: submittedQuestion, response: response, time: new Date() }, ...questionResponsePairs]);
         setQuestion('');
         setIsThinking(false);
     };
 
-    const previousQuestions = questionAnswerPairs.map((qa) => ({
-        message: qa.question,
-        time: qa.time,
-    }));
-    const previousAnswers = questionAnswerPairs.map((qa) => ({
-        message: qa.answer,
-        time: qa.time,
-    }));
+    let lastMessagePair: QuestionWithResponse | undefined = undefined;
+    const isAsking = !!question;
+    const messages = [...questionResponsePairs];
+    if (!isAsking && !isThinking) {
+        lastMessagePair = messages.shift();
+    }
+
     return (
         <OuterContainer>
             <QuestionsContainer
@@ -40,9 +40,12 @@ export const ChatContainer = () => {
                 value={question ?? ''}
                 onSubmitQuestion={handleSubmitQuestion}
                 isThinking={isThinking}
-                previousQuestions={previousQuestions}
+                lastQuestion={lastMessagePair?.question}
             />
-            <AnswersContainer isAsking={!!question} isThinking={isThinking} previousAnswers={previousAnswers} />
+            <ResponseContainer isAsking={isAsking} isThinking={isThinking} lastResponse={lastMessagePair?.response} />
+            <ChatHistoryContainer>
+                <ChatMessages messages={messages} />
+            </ChatHistoryContainer>
         </OuterContainer>
     );
 };
@@ -52,15 +55,21 @@ const OuterContainer = styled.div`
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 3fr;
+    grid-template-rows: 40% 60%;
 `;
 
-function getAnswer(question: string): string {
+const ChatHistoryContainer = styled.div`
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 2;
+`;
+
+function getResponse(question: string): string {
     if (!question) {
         return '';
     }
 
-    // Find question keywords and match these against answer keywords,
+    // Find question keywords and match these against response keywords,
     // then return best suitable response, or alternatively a fallback response
     const questionKeywords = question
         .replace(punctuationRegex, '')
