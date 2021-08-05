@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ResponseContainer } from './ResponseContainer';
 import { QuestionsContainer } from './QuestionsContainer';
+import { useIdleInfo } from './chatHooks';
+import { responseService } from './responseService';
 
 export type QuestionWithResponse = {
     question: string;
@@ -11,7 +13,7 @@ export type QuestionWithResponse = {
 };
 
 export const ChatContainer = () => {
-    const [question, setQuestion] = useState<string>();
+    const [question, setQuestion] = useState<string>('');
     const [isThinking, setIsThinking] = useState<boolean>(false);
     const [questionResponsePairs, setQuestionResponsePairs] = useState<QuestionWithResponse[]>([]);
     const handleSubmitQuestion = (submittedQuestion: string) => {
@@ -19,8 +21,15 @@ export const ChatContainer = () => {
         setTimeout(() => onThinkingComplete(submittedQuestion), 2500);
     };
 
+    const [, setIdleInfo] = useIdleInfo(setQuestion, handleSubmitQuestion);
+
+    const handleInputChange = (input: string) => {
+        setIdleInfo((s) => ({ ...s, isIdle: false, lastActionTime: new Date() }));
+        setQuestion(input);
+    };
+
     const onThinkingComplete = (submittedQuestion: string) => {
-        const response = getResponse(submittedQuestion);
+        const response = responseService.getResponse(submittedQuestion);
         setQuestionResponsePairs([{ question: submittedQuestion, response: response, time: new Date() }, ...questionResponsePairs]);
         setQuestion('');
         setIsThinking(false);
@@ -36,7 +45,7 @@ export const ChatContainer = () => {
     return (
         <OuterContainer>
             <QuestionsContainer
-                onValueChange={setQuestion}
+                onValueChange={handleInputChange}
                 value={question ?? ''}
                 onSubmitQuestion={handleSubmitQuestion}
                 isThinking={isThinking}
@@ -62,60 +71,7 @@ const ChatHistoryContainer = styled.div`
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 2;
+    justify-self: center;
+    width: 100%;
+    max-width: 800px;
 `;
-
-function getResponse(question: string): string {
-    if (!question) {
-        return '';
-    }
-
-    // Find question keywords and match these against response keywords,
-    // then return best suitable response, or alternatively a fallback response
-    const questionKeywords = question
-        .replace(punctuationRegex, '')
-        .split(' ')
-        .map((w) => w.toLowerCase());
-
-    const ratedResponses = responses.map((a) => {
-        return {
-            ...a,
-            matchedKeywordCount: a.keywords.filter((kw) => questionKeywords.includes(kw)).length,
-        };
-    });
-
-    const highestScore = Math.max(...ratedResponses.map((a) => a.matchedKeywordCount));
-    const bestResponse = ratedResponses.find((a) => a.matchedKeywordCount === highestScore && a.matchedKeywordCount > 0);
-    if (bestResponse) return bestResponse.message;
-
-    return fallbackResponses[Math.floor(fallbackResponses.length * Math.random())];
-}
-
-const responses = [
-    { message: 'Anti-vaxxers skal dø!', keywords: ['vaxx', 'vaccine', 'vaxxer', 'corona', 'covid', 'antivaxxer', 'antivaxxers'] },
-    { message: 'Jeg elsker atomkraft. Jeg er jo ikke dum.', keywords: ['energi', 'klima', 'atomkraft'] },
-    { message: 'Tabular Editor er fantastisk', keywords: ['tabular', 'datamodel'] },
-    {
-        message: 'Kom så allesammen, gentag efter mig: Hva’ vil vi ha’? mRNA!',
-        keywords: ['vaxx', 'vaccine', 'vaxxer', 'corona', 'covid', 'mrna', 'genetik', 'antivaxxer', 'antivaxxers'],
-    },
-    {
-        message: 'Dan Jørgensen er dælme sølle for en klimaminister. Stop nu idiotiet og lad videnskaben komme til.',
-        keywords: ['klima', 'klimaminister', 'videnskab', 'politik', 'jørgensen', 'dan'],
-    },
-    {
-        message: 'Er du bange for at blive forgiftet med vaccinepartikler? Så gør som alle andre frie folk og tag mundbind på!',
-        keywords: ['vaxx', 'vaccine', 'vaxxer', 'corona', 'covid', 'mundbind', 'antivaxxer', 'antivaxxers'],
-    },
-];
-
-const fallbackResponses = [
-    'Det ved jeg sgu ikke noget om.',
-    'Hvad er det for noget pis at fyre af?',
-    'Det ku du li at vide',
-    'Det er satme det dummeste jeg har hørt længe',
-    'Hold nu kæft',
-    'Spørg om noget andet',
-    'Hvorfor spørger du ikke om noget fornuftigt? Du spilder min tid.',
-];
-
-const punctuationRegex = /[.,/#!$%^&*;:{}=\-_`~()?]/g;

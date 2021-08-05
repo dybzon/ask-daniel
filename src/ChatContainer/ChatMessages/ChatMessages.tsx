@@ -1,4 +1,4 @@
-import { QuestionWithAnswer } from '../ChatContainer';
+import { QuestionWithResponse } from '../ChatContainer';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -8,7 +8,7 @@ export interface ChatMessage {
 }
 
 interface Props {
-    messages: QuestionWithAnswer[];
+    messages: QuestionWithResponse[];
 }
 
 export const ChatMessages: (props: Props) => JSX.Element = ({ messages }) => {
@@ -21,7 +21,7 @@ export const ChatMessages: (props: Props) => JSX.Element = ({ messages }) => {
     );
 };
 
-const ChatMessagePair = ({ messages }: { messages: QuestionWithAnswer }) => {
+const ChatMessagePair = ({ messages }: { messages: QuestionWithResponse }) => {
     return (
         <>
             <QuestionContainer>
@@ -37,7 +37,7 @@ const ChatMessagePair = ({ messages }: { messages: QuestionWithAnswer }) => {
                     <MessageTime>
                         {getHours(messages.time)}.{getMinutes(messages.time)}
                     </MessageTime>
-                    <Message>{messages.answer}</Message>
+                    <Message>{messages.response}</Message>
                 </MessageWrapper>
             </ResponseContainer>
         </>
