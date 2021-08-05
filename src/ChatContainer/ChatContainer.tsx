@@ -21,7 +21,8 @@ export const ChatContainer = () => {
         setTimeout(() => onThinkingComplete(submittedQuestion), 2500);
     };
 
-    const [, setIdleInfo] = useIdleInfo(setQuestion, handleSubmitQuestion);
+    const [idleInfo, setIdleInfo] = useIdleInfo(setQuestion, handleSubmitQuestion);
+    const { lastActionTime } = idleInfo;
 
     const handleInputChange = (input: string) => {
         setIdleInfo((s) => ({ ...s, isIdle: false, lastActionTime: new Date() }));
@@ -51,7 +52,12 @@ export const ChatContainer = () => {
                 isThinking={isThinking}
                 lastQuestion={lastMessagePair?.question}
             />
-            <ResponseContainer isAsking={isAsking} isThinking={isThinking} lastResponse={lastMessagePair?.response} />
+            <ResponseContainer
+                lastActionTime={lastActionTime}
+                isThinking={isThinking}
+                lastResponse={lastMessagePair?.response}
+                isAsking={isAsking}
+            />
             <ChatHistoryContainer>
                 <ChatMessages messages={messages} />
             </ChatHistoryContainer>

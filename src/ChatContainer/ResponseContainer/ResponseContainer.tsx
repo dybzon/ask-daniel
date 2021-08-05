@@ -1,21 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ResponseBubble } from './ResponseBubble';
 import { ThinkBubble } from './ThinkBubble';
 import DanielImg from './daniel1.png';
+import DanielNoddingGif from './daniel-thinking.gif';
 
 interface Props {
     isThinking: boolean; // Determines whether the oracle is currently thinking. No new questions can be asked while thinking.
     isAsking: boolean; // Determines whether some stupid noob is currently posing a question to the oracle.
+    lastActionTime: Date; // Indicates the time of the last user action.
     lastResponse?: string;
 }
 
-export const ResponseContainer: (props: Props) => JSX.Element = ({ isThinking, lastResponse }) => {
+const noddingTimeSeconds = 3;
+const noddingTimeMs = noddingTimeSeconds * 1000;
+
+export const ResponseContainer: (props: Props) => JSX.Element = ({ isThinking, lastResponse, lastActionTime, isAsking }) => {
+    const [isNodding, setIsNodding] = useState(false);
+    useEffect(() => {
+        const now = new Date();
+        const shouldNod = isAsking && now.getTime() - lastActionTime.getTime() < noddingTimeMs;
+        if (shouldNod !== isNodding) {
+            setIsNodding(shouldNod);
+        }
+
+        if (!shouldNod) {
+            return;
+        }
+
+        const noddingTimer = setTimeout(() => setIsNodding(false), noddingTimeMs);
+        return () => clearTimeout(noddingTimer);
+    }, [lastActionTime, isNodding, setIsNodding, isAsking]);
     return (
         <LayoutContainer>
             {isThinking ? <ThinkBubble /> : <ResponseBubble response={lastResponse} />}
             <ImageContainer>
-                <StyledImage />
+                <StyledImage shouldNod={isNodding} />
             </ImageContainer>
         </LayoutContainer>
     );
@@ -28,8 +48,8 @@ const LayoutContainer = styled.div`
     flex-direction: row;
 `;
 
-const StyledImage = styled.div`
-    background-image: url('${DanielImg}');
+const StyledImage = styled.div<{ shouldNod: boolean }>`
+    background-image: url('${(props) => (props.shouldNod ? DanielNoddingGif : DanielImg)}');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

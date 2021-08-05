@@ -1,9 +1,12 @@
-
+V1 - development:
 * Add support for links in responses.
+* Add more actual responses. Pick from tabular editor video or facebook, or...?
+
+Release:
+* Create a new azure website and host the thing there...
+
+Future/experimental:
+* Dynamic layout (mobile friendly) [the current one is actually close to being mobile friendly... only the top part of the layout lacks a bit]
 * Experiment with external apis for fallback responses? e.g. google(?) or duckduckgo?
 * Experiment with tailwind to replace styled components?
 * Experiment with ChakraUI? or another component/design system. E.g. materialUI.
-* Add gif to indicate that daniel is listening when the questioneer is typing
-* Add more actual responses. Pick from tabular editor video or facebook, or...?
-* Create a new azure website and host the thing there...
-* Dynamic layout (mobile friendly) [the current one is actually close to being mobile friendly... only the top part of the layout lacks a bit]

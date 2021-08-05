@@ -44,7 +44,7 @@ const idleQuestions: string[] = [
 const idleResponses: Response[] = [
     {
         message:
-            'Rasmus Dybkjær er et dejligt, smukt menneske. Han er uden sammenligning den flotteste og mest kompetente person jeg kender!',
+            'Rasmus Dybkjær er et dejligt, smukt menneske. Når jeg ser ham tænker jeg "wow!". Det er svært at sætte ord på. Han er uden sammenligning den flotteste og mest kompetente person jeg kender!',
         keywords: ['rasmus', 'dybkjær', 'kompetent', 'smuk', 'flot'],
     },
     {

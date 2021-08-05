@@ -9,7 +9,7 @@ type IdleInfo = {
     idleQuestion: string;
 };
 
-const idleTimeoutSeconds = 5;
+const idleTimeoutSeconds = 30;
 
 export const useIdleInfo: (
     setQuestion: (question: string) => void,
@@ -40,7 +40,7 @@ export const useIdleInfo: (
 
             setIdleInfo((s) => ({ ...s, idleQuestionSubstringCounter: idleQuestionSubstringCounter + 1 }));
             setQuestion(idleQuestion.substring(0, idleQuestionSubstringCounter));
-        }, 200);
+        }, 150);
 
         return () => clearInterval(idleCounterInterval);
     }, [setIdleInfo, setQuestion, idleInfo]);
