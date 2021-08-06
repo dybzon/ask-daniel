@@ -1,11 +1,7 @@
 import { QuestionWithResponse } from '../ChatContainer';
 import React from 'react';
 import styled from 'styled-components';
-
-export interface ChatMessage {
-    message: string;
-    time: Date;
-}
+import { isComplexMessage, Message } from '../responseService';
 
 interface Props {
     messages: QuestionWithResponse[];
@@ -22,25 +18,68 @@ export const ChatMessages: (props: Props) => JSX.Element = ({ messages }) => {
 };
 
 const ChatMessagePair = ({ messages }: { messages: QuestionWithResponse }) => {
+    const { time, response, question } = messages;
     return (
         <>
-            <QuestionContainer>
-                <MessageWrapper>
-                    <MessageTime>
-                        {getHours(messages.time)}.{getMinutes(messages.time)}
-                    </MessageTime>
-                    <Message>{messages.question}</Message>
-                </MessageWrapper>
-            </QuestionContainer>
-            <ResponseContainer>
-                <MessageWrapper>
-                    <MessageTime>
-                        {getHours(messages.time)}.{getMinutes(messages.time)}
-                    </MessageTime>
-                    <Message>{messages.response}</Message>
-                </MessageWrapper>
-            </ResponseContainer>
+            <Question time={time} question={question} />
+            <Response time={time} response={response} />
         </>
+    );
+};
+
+interface QuestionProps {
+    question: string;
+    time: Date;
+}
+
+const Question: (props: QuestionProps) => JSX.Element = ({ question, time }) => {
+    return (
+        <QuestionContainer>
+            <MessageWrapper>
+                <MessageTime>
+                    {getHours(time)}.{getMinutes(time)}
+                </MessageTime>
+                <MessageContent>{question}</MessageContent>
+            </MessageWrapper>
+        </QuestionContainer>
+    );
+};
+
+interface ResponseProps {
+    response: Message;
+    time: Date;
+}
+
+const Response: (props: ResponseProps) => JSX.Element = ({ response, time }) => {
+    let messageText: JSX.Element;
+
+    if (isComplexMessage(response)) {
+        messageText = (
+            <>
+                {response.map((mp, i) =>
+                    mp.type === 'Link' ? (
+                        <Link href={mp.src} key={i} target="_blank">
+                            {mp.value}
+                        </Link>
+                    ) : (
+                        <Text key={i}>{mp.value}</Text>
+                    )
+                )}
+            </>
+        );
+    } else {
+        messageText = <Text>{response}</Text>;
+    }
+
+    return (
+        <ResponseContainer>
+            <MessageWrapper>
+                <MessageTime>
+                    {getHours(time)}.{getMinutes(time)}
+                </MessageTime>
+                <MessageContent>{messageText}</MessageContent>
+            </MessageWrapper>
+        </ResponseContainer>
     );
 };
 
@@ -79,7 +118,11 @@ const MessageTime = styled.div`
     margin-right: 12px;
 `;
 
-const Message = styled.div``;
+const MessageContent = styled.div``;
+
+const Text = styled.span``;
+
+const Link = styled.a``;
 
 function getHours(date: Date): string {
     const hours = date.getHours();

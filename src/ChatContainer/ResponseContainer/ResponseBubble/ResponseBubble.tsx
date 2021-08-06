@@ -1,9 +1,10 @@
+import { isComplexMessage, Message } from '../../responseService';
 import React from 'react';
 import styled from 'styled-components';
 import BubbleImg from './answer-bubble.png';
 
 interface Props {
-    response?: string;
+    response?: Message;
 }
 
 export const ResponseBubble: (props: Props) => JSX.Element | null = ({ response }) => {
@@ -11,9 +12,29 @@ export const ResponseBubble: (props: Props) => JSX.Element | null = ({ response 
         return <Placeholder />;
     }
 
+    let messageText: JSX.Element;
+
+    if (isComplexMessage(response)) {
+        messageText = (
+            <>
+                {response.map((mp, i) =>
+                    mp.type === 'Link' ? (
+                        <Link href={mp.src} key={i} target="_blank">
+                            {mp.value}
+                        </Link>
+                    ) : (
+                        <Text key={i}>{mp.value}</Text>
+                    )
+                )}
+            </>
+        );
+    } else {
+        messageText = <Text>{response}</Text>;
+    }
+
     return (
         <Bubble>
-            <TextContainer>{response}</TextContainer>
+            <TextContainer>{messageText}</TextContainer>
         </Bubble>
     );
 };
@@ -39,3 +60,7 @@ const Placeholder = styled.div`
     flex: 0 1 80%;
     background-size: 100% 100%;
 `;
+
+const Text = styled.span``;
+
+const Link = styled.a``;

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { ResponseContainer } from './ResponseContainer';
 import { QuestionsContainer } from './QuestionsContainer';
 import { useIdleInfo } from './chatHooks';
-import { responseService } from './responseService';
+import { Message, responseService } from './responseService';
 
 export type QuestionWithResponse = {
     question: string;
-    response: string;
+    response: Message;
     time: Date;
 };
 

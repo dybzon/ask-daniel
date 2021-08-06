@@ -3,7 +3,7 @@ export const responseService = {
     getIdleQuestion,
 };
 
-function getResponse(question: string): string {
+function getResponse(question: string): Message {
     if (!question) {
         return '';
     }
@@ -29,8 +29,18 @@ function getResponse(question: string): string {
     return fallbackResponses[Math.floor(fallbackResponses.length * Math.random())];
 }
 
+export type MessagePart = {
+    value: string;
+    src?: string;
+    type?: 'Link' | 'Text';
+};
+
+export type Message = string | MessagePart[];
+
+export const isComplexMessage = (x: Message): x is MessagePart[] => Array.isArray(x);
+
 type Response = {
-    message: string;
+    message: Message;
     keywords: string[];
 };
 
@@ -54,8 +64,11 @@ const idleResponses: Response[] = [
     },
     { message: 'Jeg er helt tosset med data. Jeg er faktisk en datagud 😎👴🙌', keywords: ['data', 'datagud', 'gud'] },
     {
-        message:
-            'Jeg hader de fjolser der parkerer ulovligt! Især ude omkring Kattegatcentret. Der ringer jeg gerne til Qpark så der kommer orden i sagerne',
+        message: [
+            { value: 'Jeg hader de fjolser der parkerer ulovligt! Især ude omkring Kattegatcentret. Der ringer jeg gerne til ' },
+            { value: 'QPark', src: 'https://www.q-park.dk/da/kontakt-os/', type: 'Link' },
+            { value: ' så der kommer orden i sagerne' },
+        ],
         keywords: ['parkering', 'qpark', 'parkeringsplads', 'parkere', 'parkerer', 'ulovligt'],
     },
 ];

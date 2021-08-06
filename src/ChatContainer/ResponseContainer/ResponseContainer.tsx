@@ -4,12 +4,13 @@ import { ResponseBubble } from './ResponseBubble';
 import { ThinkBubble } from './ThinkBubble';
 import DanielImg from './daniel1.png';
 import DanielNoddingGif from './daniel-thinking.gif';
+import { Message } from '../responseService';
 
 interface Props {
     isThinking: boolean; // Determines whether the oracle is currently thinking. No new questions can be asked while thinking.
     isAsking: boolean; // Determines whether some stupid noob is currently posing a question to the oracle.
     lastActionTime: Date; // Indicates the time of the last user action.
-    lastResponse?: string;
+    lastResponse?: Message;
 }
 
 const noddingTimeSeconds = 3;

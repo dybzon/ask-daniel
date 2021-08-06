@@ -1,6 +1,7 @@
 V1 - development:
 * Add support for links in responses.
 * Add more actual responses. Pick from tabular editor video or facebook, or...?
+* Better gif for nodding
 
 Release:
 * Create a new azure website and host the thing there...
