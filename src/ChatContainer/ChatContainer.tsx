@@ -5,6 +5,7 @@ import { ResponseContainer } from './ResponseContainer';
 import { QuestionsContainer } from './QuestionsContainer';
 import { useIdleInfo } from './chatHooks';
 import { Message, responseService } from './responseService';
+import { theme } from '../theme';
 
 export type QuestionWithResponse = {
     question: string;
@@ -69,15 +70,28 @@ const OuterContainer = styled.div`
     display: grid;
     width: 100%;
     height: 100%;
+
+    background-color: ${theme.colors.dark.primary.default};
+
+    // Default grid 2 x 2
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 40% 60%;
+
+    @media (max-width: ${theme.breakpoints.md}px) {
+        // Small grid 1 x 3
+        grid-template-columns: 100%;
+        grid-template-rows: 20% 20% 60%;
+    }
 `;
 
 const ChatHistoryContainer = styled.div`
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 2;
     justify-self: center;
     width: 100%;
     max-width: 800px;
+
+    @media (min-width: ${theme.breakpoints.md}px) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 2;
+    }
 `;

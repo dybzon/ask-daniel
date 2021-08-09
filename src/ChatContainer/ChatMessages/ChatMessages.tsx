@@ -2,6 +2,7 @@ import { QuestionWithResponse } from '../ChatContainer';
 import React from 'react';
 import styled from 'styled-components';
 import { isComplexMessage, Message } from '../responseService';
+import { theme } from '../../theme';
 
 interface Props {
     messages: QuestionWithResponse[];
@@ -34,14 +35,14 @@ interface QuestionProps {
 
 const Question: (props: QuestionProps) => JSX.Element = ({ question, time }) => {
     return (
-        <QuestionContainer>
-            <MessageWrapper>
+        <MessageContainer justifyContent="flex-start">
+            <MessageWrapper backgroundColor={theme.colors.dark.secondary.default}>
                 <MessageTime>
                     {getHours(time)}.{getMinutes(time)}
                 </MessageTime>
                 <MessageContent>{question}</MessageContent>
             </MessageWrapper>
-        </QuestionContainer>
+        </MessageContainer>
     );
 };
 
@@ -72,14 +73,14 @@ const Response: (props: ResponseProps) => JSX.Element = ({ response, time }) => 
     }
 
     return (
-        <ResponseContainer>
-            <MessageWrapper>
+        <MessageContainer justifyContent="flex-end">
+            <MessageWrapper backgroundColor={theme.colors.dark.third.default}>
                 <MessageTime>
                     {getHours(time)}.{getMinutes(time)}
                 </MessageTime>
                 <MessageContent>{messageText}</MessageContent>
             </MessageWrapper>
-        </ResponseContainer>
+        </MessageContainer>
     );
 };
 
@@ -91,25 +92,19 @@ const MessagesContainer = styled.div`
     justify-content: start;
 `;
 
-const QuestionContainer = styled.div`
+const MessageContainer = styled.div<{ justifyContent: string }>`
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: ${(props) => props.justifyContent};
 `;
 
-const ResponseContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-`;
-
-const MessageWrapper = styled.div`
+const MessageWrapper = styled.div<{ backgroundColor: string }>`
     padding: 4px 12px;
     margin: 4px;
     border-radius: 8px;
     max-width: 80%;
-    background-color: #404040;
-    color: white;
+    background-color: ${(props) => props.backgroundColor};
+    color: ${theme.colors.dark.white};
     display: flex;
 `;
 

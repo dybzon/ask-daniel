@@ -1,7 +1,10 @@
 V1 - development:
-* Add support for links in responses.
+* Better styling of links/animation on hover
 * Add more actual responses. Pick from tabular editor video or facebook, or...?
 * Better gif for nodding
+* Fix root imports/aliases
+* Fix styling of oracle/daniel avatar. Should be fully round circle, always centered horiz/vertic in its parent.
+* Fix think-bubble. Write it using css-only, and make the text dynamic?
 
 Release:
 * Create a new azure website and host the thing there...

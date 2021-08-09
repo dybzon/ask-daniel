@@ -5,6 +5,7 @@ import { ThinkBubble } from './ThinkBubble';
 import DanielImg from './daniel1.png';
 import DanielNoddingGif from './daniel-thinking.gif';
 import { Message } from '../responseService';
+import { theme } from '../../theme';
 
 interface Props {
     isThinking: boolean; // Determines whether the oracle is currently thinking. No new questions can be asked while thinking.
@@ -43,10 +44,10 @@ export const ResponseContainer: (props: Props) => JSX.Element = ({ isThinking, l
 };
 
 const LayoutContainer = styled.div`
-    grid-column-start: 2;
-    grid-row-start: 1;
     display: flex;
     flex-direction: row;
+    margin-left: 8px;
+    width: calc(100%-8px); ;
 `;
 
 const StyledImage = styled.div<{ shouldNod: boolean }>`
@@ -57,7 +58,6 @@ const StyledImage = styled.div<{ shouldNod: boolean }>`
     width: 100%;
     height: 95%;
     border-radius: 50%;
-    border: 4px solid #404040;
 `;
 
 const ImageContainer = styled.div`

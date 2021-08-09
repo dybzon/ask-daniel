@@ -1,7 +1,7 @@
 import { isComplexMessage, Message } from '../../responseService';
 import React from 'react';
 import styled from 'styled-components';
-import BubbleImg from './answer-bubble.png';
+import { theme } from '../../../theme';
 
 interface Props {
     response?: Message;
@@ -33,27 +33,59 @@ export const ResponseBubble: (props: Props) => JSX.Element | null = ({ response 
     }
 
     return (
-        <Bubble>
-            <TextContainer>{messageText}</TextContainer>
-        </Bubble>
+        <BubbleContainer>
+            <Bubble>
+                <BubblePointer />
+                <TextContainer>{messageText}</TextContainer>
+            </Bubble>
+        </BubbleContainer>
     );
 };
 
-const Bubble = styled.div`
-    background-image: url('${BubbleImg}');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    flex: 0 1 80%;
-
+const BubbleContainer = styled.div`
     display: flex;
+    justify-content: flex-start;
     align-items: center;
-    justify-content: center;
+`;
+
+const Bubble = styled.div`
+    background-color: ${theme.colors.dark.third.default};
+    width: 90%;
+    height: 90%;
+    border-radius: 50px;
+    position: relative;
+`;
+
+const BubblePointer = styled.div`
+    width: 80px;
+    height: 20px;
+    position: relative;
+    top: 40%;
+    left: 97%;
+    overflow: hidden;
+    transform: rotate(0.05turn);
+
+    :before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: ${theme.colors.dark.third.default};
+        transform-origin: 0 0;
+        transform: rotate(0.06turn);
+    }
 `;
 
 const TextContainer = styled.p`
-    max-width: 80%;
-    max-height: 80%;
+    position: relative;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
     margin: 0;
+    color: ${theme.colors.dark.white};
 `;
 
 const Placeholder = styled.div`
