@@ -117,7 +117,32 @@ const MessageContent = styled.div``;
 
 const Text = styled.span``;
 
-const Link = styled.a``;
+const Link = styled.a`
+    color: ${theme.colors.dark.white};
+    text-decoration: none;
+    position: relative;
+    z-index: 0;
+
+    :hover {
+        :after {
+            transform: rotate(180deg);
+            transition: 0.3s all;
+        }
+    }
+
+    :after {
+        content: '';
+        width: 120%;
+        height: 50%;
+        position: absolute;
+        top: 25%;
+        left: -10%;
+        background-color: ${theme.colors.dark.secondary.default};
+        transition: 0.3s all;
+        transform: rotate(6deg);
+        z-index: -1;
+    }
+`;
 
 function getHours(date: Date): string {
     const hours = date.getHours();
