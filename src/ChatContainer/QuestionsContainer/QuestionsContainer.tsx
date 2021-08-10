@@ -55,13 +55,13 @@ const Bubble = styled.div`
 `;
 
 const BubblePointer = styled.div`
-    width: 15%;
-    height: 15%;
+    width: 10%;
+    padding-bottom: 7.09%; // = width / 1.41 (height of the resulting element)
     position: relative;
-    top: 70%;
-    left: -13%;
+    top: 50%;
+    left: 0;
+    transform: translateX(-99%);
     overflow: hidden;
-    transform: rotate(-0.05turn);
 
     :before {
         content: '';
@@ -71,8 +71,8 @@ const BubblePointer = styled.div`
         width: 100%;
         height: 100%;
         background-color: ${theme.colors.dark.secondary.default};
-        transform-origin: 100% 0;
-        transform: rotate(-0.07turn);
+        transform-origin: top right;
+        transform: rotate(-45deg);
     }
 `;
 

@@ -56,10 +56,13 @@ const StyledImage = styled.div<{ shouldNod: boolean }>`
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 95%;
+    padding-bottom: 100%;
     border-radius: 50%;
 `;
 
 const ImageContainer = styled.div`
     flex: 0 1 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;

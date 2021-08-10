@@ -8,13 +8,9 @@ interface Props {
 }
 
 export const ResponseBubble: (props: Props) => JSX.Element | null = ({ response }) => {
-    if (!response) {
-        return <Placeholder />;
-    }
-
     let messageText: JSX.Element;
 
-    if (isComplexMessage(response)) {
+    if (response && isComplexMessage(response)) {
         messageText = (
             <>
                 {response.map((mp, i) =>
@@ -35,14 +31,15 @@ export const ResponseBubble: (props: Props) => JSX.Element | null = ({ response 
     return (
         <BubbleContainer>
             <Bubble>
-                <BubblePointer />
                 <TextContainer>{messageText}</TextContainer>
+                <BubblePointer />
             </Bubble>
         </BubbleContainer>
     );
 };
 
 const BubbleContainer = styled.div`
+    flex: 0 1 80%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -53,17 +50,20 @@ const Bubble = styled.div`
     width: 90%;
     height: 90%;
     border-radius: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     position: relative;
 `;
 
 const BubblePointer = styled.div`
-    width: 80px;
-    height: 20px;
-    position: relative;
-    top: 40%;
-    left: 97%;
+    width: 10%;
+    padding-bottom: 7.09%; // = width / 1.41 (height of the resulting element)
+    position: absolute;
+    top: 50;
+    right: 0;
+    transform: translateX(99%);
     overflow: hidden;
-    transform: rotate(0.05turn);
 
     :before {
         content: '';
@@ -73,15 +73,12 @@ const BubblePointer = styled.div`
         width: 100%;
         height: 100%;
         background-color: ${theme.colors.dark.third.default};
-        transform-origin: 0 0;
-        transform: rotate(0.06turn);
+        transform-origin: top left;
+        transform: rotate(45deg);
     }
 `;
 
 const TextContainer = styled.p`
-    position: relative;
-    top: 5%;
-    left: 5%;
     width: 90%;
     height: 90%;
     margin: 0;
