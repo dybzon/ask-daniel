@@ -1,6 +1,9 @@
 {
     "name": "ask-daniel",
     "version": "0.0.0",
+    "author": "Rasmus Dybkjær",
+    "license": "ISC",
+    "description": "A robot Daniel that will answer your questions. Daniel is now deprecated.",
     "scripts": {
         "dev": "vite",
         "devts": "concurrently -n \"vite,typescript\" -c \"white,green\" \"vite --clearScreen false\" \"tsc -w --preserveWatchOutput\"",

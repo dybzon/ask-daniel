@@ -3,9 +3,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ResponseContainer } from './ResponseContainer';
 import { QuestionsContainer } from './QuestionsContainer';
-import { useIdleInfo } from './chatHooks';
-import { Message, responseService } from './responseService';
-import { theme } from '../theme';
+import { useIdleInfo, Message, responseService } from '@/utils';
+import { theme } from '@/theme';
 
 export type QuestionWithResponse = {
     question: string;

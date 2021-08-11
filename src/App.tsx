@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { ChatContainer } from './ChatContainer';
 
 function App() {

@@ -1,8 +1,8 @@
 V1 - development:
 * Add more actual responses. Pick from tabular editor video or facebook, or...?
 * Better gif for nodding
-* Fix root imports/aliases
 * Fix think-bubble. Write it using css-only, and make the text dynamic?
+* Add support for scrolling through previous questions. e.g. ctrl+scroll, or ctrl+up/down?
 
 Release:
 * Create a new azure website and host the thing there...

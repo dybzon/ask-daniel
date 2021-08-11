@@ -1,8 +1,8 @@
-import { isComplexMessage, Message } from '../../responseService';
+import { isComplexMessage, Message } from '@/utils';
 import React from 'react';
 import styled from 'styled-components';
-import { theme } from '../../../theme';
-import { ExternalLink } from '../../../components';
+import { theme } from '@/theme';
+import { ExternalLink } from '@/components';
 
 interface Props {
     response?: Message;

@@ -1,9 +1,9 @@
-import { QuestionWithResponse } from '../ChatContainer';
+import type { QuestionWithResponse } from '@/ChatContainer';
 import React from 'react';
 import styled from 'styled-components';
-import { isComplexMessage, Message } from '../responseService';
-import { theme } from '../../theme';
-import { ExternalLink } from '../../components';
+import { isComplexMessage, Message } from '@/utils';
+import { theme } from '@/theme';
+import { ExternalLink } from '@/components';
 
 interface Props {
     messages: QuestionWithResponse[];
