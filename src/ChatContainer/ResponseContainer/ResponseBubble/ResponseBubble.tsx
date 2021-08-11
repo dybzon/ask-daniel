@@ -2,6 +2,7 @@ import { isComplexMessage, Message } from '../../responseService';
 import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../../theme';
+import { ExternalLink } from '../../../components';
 
 interface Props {
     response?: Message;
@@ -15,9 +16,9 @@ export const ResponseBubble: (props: Props) => JSX.Element | null = ({ response 
             <>
                 {response.map((mp, i) =>
                     mp.type === 'Link' ? (
-                        <Link href={mp.src} key={i} target="_blank">
+                        <ExternalLink href={mp.src} key={i} target="_blank">
                             {mp.value}
-                        </Link>
+                        </ExternalLink>
                     ) : (
                         <Text key={i}>{mp.value}</Text>
                     )
@@ -85,11 +86,4 @@ const TextContainer = styled.p`
     color: ${theme.colors.dark.white};
 `;
 
-const Placeholder = styled.div`
-    flex: 0 1 80%;
-    background-size: 100% 100%;
-`;
-
 const Text = styled.span``;
-
-const Link = styled.a``;

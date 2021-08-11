@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { isComplexMessage, Message } from '../responseService';
 import { theme } from '../../theme';
+import { ExternalLink } from '../../components';
 
 interface Props {
     messages: QuestionWithResponse[];
@@ -59,9 +60,9 @@ const Response: (props: ResponseProps) => JSX.Element = ({ response, time }) => 
             <>
                 {response.map((mp, i) =>
                     mp.type === 'Link' ? (
-                        <Link href={mp.src} key={i} target="_blank">
+                        <ExternalLink href={mp.src} key={i} target="_blank">
                             {mp.value}
-                        </Link>
+                        </ExternalLink>
                     ) : (
                         <Text key={i}>{mp.value}</Text>
                     )
@@ -116,33 +117,6 @@ const MessageTime = styled.div`
 const MessageContent = styled.div``;
 
 const Text = styled.span``;
-
-const Link = styled.a`
-    color: ${theme.colors.dark.white};
-    text-decoration: none;
-    position: relative;
-    z-index: 0;
-
-    :hover {
-        :after {
-            transform: rotate(180deg);
-            transition: 0.3s all;
-        }
-    }
-
-    :after {
-        content: '';
-        width: 120%;
-        height: 50%;
-        position: absolute;
-        top: 25%;
-        left: -10%;
-        background-color: ${theme.colors.dark.secondary.default};
-        transition: 0.3s all;
-        transform: rotate(6deg);
-        z-index: -1;
-    }
-`;
 
 function getHours(date: Date): string {
     const hours = date.getHours();
