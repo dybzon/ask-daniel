@@ -70,6 +70,14 @@ const OuterContainer = styled.div`
     display: grid;
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    ::-webkit-scrollbar {
+        /* WebKit */
+        width: 0;
+        height: 0;
+    }
 
     background-color: ${theme.colors.dark.primary.default};
 
@@ -81,6 +89,20 @@ const OuterContainer = styled.div`
         // Small grid 1 x 3
         grid-template-columns: 100%;
         grid-template-rows: 20% 20% 60%;
+
+        div,
+        p,
+        textarea {
+            font-size: 22px;
+        }
+    }
+
+    @media (max-width: ${theme.breakpoints.sm}px) {
+        div,
+        p,
+        textarea {
+            font-size: 18px;
+        }
     }
 `;
 

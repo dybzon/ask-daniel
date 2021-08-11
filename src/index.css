@@ -22,8 +22,12 @@ body,
     height: 100%;
     font-family: 'AmaticSC-Bold';
     font-size: 28px;
+    overflow: hidden;
 }
 
+p,
 textarea {
     font-family: 'AmaticSC-Bold';
+    font-size: 28px;
+    text-align: center;
 }

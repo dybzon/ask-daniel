@@ -5,7 +5,6 @@ import { ThinkBubble } from './ThinkBubble';
 import DanielImg from './daniel1.png';
 import DanielNoddingGif from './daniel-thinking.gif';
 import { Message } from '../responseService';
-import { theme } from '../../theme';
 
 interface Props {
     isThinking: boolean; // Determines whether the oracle is currently thinking. No new questions can be asked while thinking.

@@ -9,8 +9,9 @@ export const ExternalLink = styled.a`
 
     :hover {
         :after {
-            transform: rotate(-8deg) scaleX(120%);
+            transform: rotate(-2deg) scaleX(120%);
             border-color: ${theme.colors.dark.secondary.light};
+            background-color: ${theme.colors.dark.secondary.light};
             transition: 0.3s all;
         }
     }

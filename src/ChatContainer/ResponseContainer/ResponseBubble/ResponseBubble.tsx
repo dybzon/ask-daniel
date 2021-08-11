@@ -55,6 +55,13 @@ const Bubble = styled.div`
     justify-content: space-around;
     align-items: center;
     position: relative;
+
+    @media (max-width: ${theme.breakpoints.md}px) {
+        border-radius: 30px;
+    }
+    @media (max-width: ${theme.breakpoints.sm}px) {
+        border-radius: 20px;
+    }
 `;
 
 const BubblePointer = styled.div`

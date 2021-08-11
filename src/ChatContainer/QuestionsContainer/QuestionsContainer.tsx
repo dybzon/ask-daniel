@@ -52,6 +52,13 @@ const Bubble = styled.div`
     height: 90%;
     border-radius: 50px;
     position: relative;
+
+    @media (max-width: ${theme.breakpoints.md}px) {
+        border-radius: 30px;
+    }
+    @media (max-width: ${theme.breakpoints.sm}px) {
+        border-radius: 20px;
+    }
 `;
 
 const BubblePointer = styled.div`
@@ -60,7 +67,7 @@ const BubblePointer = styled.div`
     position: relative;
     top: 50%;
     left: 0;
-    transform: translateX(-99%);
+    transform: translateX(-98%);
     overflow: hidden;
 
     :before {

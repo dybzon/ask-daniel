@@ -62,7 +62,13 @@ const idleResponses: Response[] = [
             'Jeg er helt vild med svævefly. Engang fløj jeg helt til Svalbard og tilbage ved hjælp af lidt varm luft. Helt fantastisk.',
         keywords: ['flyve', 'svæve', 'svævefly', 'rejse'],
     },
-    { message: 'Jeg er helt tosset med data. Jeg er faktisk en datagud 😎👴🙌', keywords: ['data', 'datagud', 'gud'] },
+    {
+        message: [
+            { value: 'Jeg er helt tosset med data. Jeg er faktisk en ' },
+            { value: 'datagud 😎👴🙌', src: 'https://www.kratosbi.com/data-god-daniel-otykier', type: 'Link' },
+        ],
+        keywords: ['data', 'datagud', 'gud'],
+    },
     {
         message: [
             { value: 'Jeg hader de fjolser der parkerer ulovligt! Især ude omkring Kattegatcentret. Der ringer jeg gerne til ' },
@@ -76,7 +82,14 @@ const idleResponses: Response[] = [
 const responses: Response[] = [
     ...idleResponses,
     { message: 'Anti-vaxxers skal dø!', keywords: ['vaxx', 'vaccine', 'vaxxer', 'corona', 'covid', 'antivaxxer', 'antivaxxers'] },
-    { message: 'Jeg elsker atomkraft. Jeg er jo ikke dum.', keywords: ['energi', 'klima', 'atomkraft'] },
+    {
+        message: [
+            { value: 'Jeg ' },
+            { value: 'elsker atomkraft.', src: 'https://www.atomkraft-jatak.dk/', type: 'Link' },
+            { value: ' Jeg er jo ikke dum.' },
+        ],
+        keywords: ['energi', 'klima', 'atomkraft'],
+    },
     { message: 'Tabular Editor er fantastisk', keywords: ['tabular', 'datamodel'] },
     {
         message: 'Kom så allesammen, gentag efter mig: Hva’ vil vi ha’? mRNA!',
@@ -89,6 +102,19 @@ const responses: Response[] = [
     {
         message: 'Er du bange for at blive forgiftet med vaccinepartikler? Så gør som alle andre frie folk og tag mundbind på!',
         keywords: ['vaxx', 'vaccine', 'vaxxer', 'corona', 'covid', 'mundbind', 'antivaxxer', 'antivaxxers'],
+    },
+    {
+        message: 'Jeg er vild med frokost. Vi spiser bunkevis af karbonader her i Jylland... nam nam. Ska vi spise noget nu?',
+        keywords: ['mad', 'sulten', 'frokost'],
+    },
+    {
+        message:
+            'Klimaforandringer kommer på sigt til at være den mest ødelæggende, omkostningsfulde og menneskelivskrævende katastrofe vi nogensinde har været vidner til. Den får pandemien til at ligne en væltet cykel til sammenligning',
+        keywords: ['klimaforandringer', 'katastrofe', 'klima'],
+    },
+    {
+        message: 'At “lave sin egen research” er som at lave sine egne vandrør. Det bliver bedst hvis man er VVS’er.',
+        keywords: ['research', 'pseudovidenskab', 'antivaxxer', 'videnskab', 'forskning'],
     },
 ];
 
