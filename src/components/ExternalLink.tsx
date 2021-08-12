@@ -7,10 +7,11 @@ export const ExternalLink = styled.a`
     position: relative;
     z-index: 0;
 
-    :hover {
+    :hover,
+    :focus {
         :after {
             transform: rotate(-2deg) scaleX(120%);
-            border-color: ${theme.colors.dark.secondary.light};
+            border: none;
             background-color: ${theme.colors.dark.secondary.light};
             transition: 0.3s all;
         }
