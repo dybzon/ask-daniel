@@ -3,6 +3,7 @@ V1 - development:
 * Better gif for nodding
 * Fix think-bubble. Write it using css-only, and make the text dynamic?
 * Add support for scrolling through previous questions. e.g. ctrl+scroll, or ctrl+up/down?
+* Style links with :focus too (not just :hover)
 
 Release:
 * Create a new azure website and host the thing there...
@@ -12,3 +13,4 @@ Future/experimental:
 * Experiment with external apis for fallback responses? e.g. google(?) or duckduckgo?
 * Experiment with tailwind to replace styled components?
 * Experiment with ChakraUI? or another component/design system. E.g. materialUI.
+* Add backend to pick up all questions in storage.
