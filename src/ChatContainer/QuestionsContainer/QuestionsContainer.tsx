@@ -32,6 +32,7 @@ export const QuestionsContainer: (props: Props) => JSX.Element = ({ onValueChang
                     onKeyDown={handleKeyDown}
                     value={value}
                     placeholder={lastQuestion}
+                    aria-label="Textarea for question input"
                 />
             </Bubble>
         </BubbleContainer>
