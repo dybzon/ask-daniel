@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ResponseBubble } from './ResponseBubble';
 import { ThinkBubble } from './ThinkBubble';
-import DanielImg from './daniel1.png';
-import DanielNoddingGif from './daniel-thinking.gif';
+import DanielAvatar from './daniel-avatar.png';
+import DanielNodding from './daniel-thinking.gif';
 import { Message } from '@/utils';
+import { theme } from '@/theme';
 
 interface Props {
     isThinking: boolean; // Determines whether the oracle is currently thinking. No new questions can be asked while thinking.
@@ -50,13 +51,14 @@ const LayoutContainer = styled.div`
 `;
 
 const StyledImage = styled.div<{ shouldNod: boolean }>`
-    background-image: url('${(props) => (props.shouldNod ? DanielNoddingGif : DanielImg)}');
+    background-image: url('${(props) => (props.shouldNod ? DanielNodding : DanielAvatar)}');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     width: 100%;
     padding-bottom: 100%;
-    border-radius: 50%;
+    border-radius: 30%;
+    border: 8px solid ${theme.colors.dark.third.default};
 `;
 
 const ImageContainer = styled.div`

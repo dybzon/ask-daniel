@@ -37,7 +37,7 @@ interface QuestionProps {
 const Question: (props: QuestionProps) => JSX.Element = ({ question, time }) => {
     return (
         <MessageContainer justifyContent="flex-start">
-            <MessageWrapper backgroundColor={theme.colors.dark.secondary.default}>
+            <MessageWrapper backgroundColor={theme.colors.dark.secondary.dark}>
                 <MessageTime>
                     {getHours(time)}.{getMinutes(time)}
                 </MessageTime>
@@ -75,7 +75,7 @@ const Response: (props: ResponseProps) => JSX.Element = ({ response, time }) => 
 
     return (
         <MessageContainer justifyContent="flex-end">
-            <MessageWrapper backgroundColor={theme.colors.dark.third.default}>
+            <MessageWrapper backgroundColor={theme.colors.dark.third.dark}>
                 <MessageTime>
                     {getHours(time)}.{getMinutes(time)}
                 </MessageTime>

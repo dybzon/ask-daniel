@@ -66,9 +66,9 @@ const BubblePointer = styled.div`
     width: 10%;
     padding-bottom: 7.09%; // = width / 1.41 (height of the resulting element)
     position: relative;
-    top: 50%;
+    top: 40%;
     left: 0;
-    transform: translateX(-98%);
+    transform: translateX(-100%);
     overflow: hidden;
 
     :before {

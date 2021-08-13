@@ -3,8 +3,10 @@ V1 - development:
 * Better gif for nodding
 * Make the daniel avator nicer... some sort of border/effect around it?
 * Add support for scrolling through previous questions. e.g. ctrl+scroll, or ctrl+up/down?
-* Set up a pipeline to automatically build/deploy changes on push to github? github pages?
+* Set up a pipeline to automatically build/deploy changes on push to github? github pages? consider gh-pages npm package (https://www.npmjs.com/package/gh-pages) for automatic push to gh-pages branch on github.
 * Custom "daniel" cursor in textarea?
+* Auto-remove un-used import on save?
+
 
 Release:
 * Create a new azure website and host the thing there...
