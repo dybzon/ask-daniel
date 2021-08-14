@@ -171,7 +171,7 @@ var e=Object.defineProperty,t=Object.defineProperties,r=Object.getOwnPropertyDes
     margin-left: 8px;
     width: calc(100%-8px); ;
 `,W=m.div`
-    background-image: url('${e=>e.shouldNod?"/assets/daniel-thinking.8616aa71.gif":"/assets/daniel-avatar.090ca183.png"}');
+    background-image: url('${e=>e.shouldNod?"/ask-daniel/assets/daniel-thinking.8616aa71.gif":"/ask-daniel/assets/daniel-avatar.090ca183.png"}');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
