@@ -4,11 +4,14 @@
     "author": "Rasmus Dybkjær",
     "license": "ISC",
     "description": "A robot Daniel that will answer your questions. Daniel is now deprecated.",
+    "homepage": "https://dybzon.github.io/ask-daniel",
     "scripts": {
         "dev": "vite",
         "devts": "concurrently -n \"vite,typescript\" -c \"white,green\" \"vite --clearScreen false\" \"tsc -w --preserveWatchOutput\"",
         "build": "tsc && vite build",
-        "serve": "vite preview"
+        "serve": "vite preview",
+        "predeploy": "yarn build",
+        "deploy": "gh-pages -d dist"
     },
     "dependencies": {
         "react": "^17.0.0",
@@ -27,6 +30,7 @@
         "eslint": "^7.31.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-react": "^7.24.0",
+        "gh-pages": "^3.2.3",
         "prettier": "^2.3.2",
         "typescript": "^4.3.2",
         "vite": "^2.4.3"
