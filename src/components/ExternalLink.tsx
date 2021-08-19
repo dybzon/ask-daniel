@@ -8,7 +8,8 @@ export const ExternalLink = styled.a`
     z-index: 0;
 
     :hover,
-    :focus {
+    :focus,
+    :active {
         :after {
             transform: rotate(-2deg) scaleX(120%);
             border: none;
