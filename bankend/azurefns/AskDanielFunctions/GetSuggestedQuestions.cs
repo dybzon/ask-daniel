@@ -19,7 +19,7 @@ namespace AskDanielFunctions
 
         [FunctionName("GetSuggestedQuestions")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req, ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger log)
         {
             var suggestions = await this.questionRepository.GetSuggestedQuestions();
             return new OkObjectResult(suggestions);

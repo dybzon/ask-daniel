@@ -21,7 +21,7 @@ namespace AskDanielFunctions
 
         [FunctionName("GetResponses")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req, ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger log)
         {
             //var calledFromIpAddress = GetIpFromRequestHeaders(req);
             //log.LogInformation($"Function called by IP {calledFromIpAddress}");

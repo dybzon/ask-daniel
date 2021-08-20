@@ -19,7 +19,7 @@ namespace AskDanielFunctions
 
         [FunctionName("GetAutoQuestions")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req, ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger log)
         {
             var autoQuestions = await this.questionRepository.GetAutoQuestions();
             return new OkObjectResult(autoQuestions);
