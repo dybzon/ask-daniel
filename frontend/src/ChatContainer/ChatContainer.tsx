@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ResponseContainer } from './ResponseContainer';
 import { QuestionsContainer } from './QuestionsContainer';
-import { useIdleInfo, Message, responseService } from '@/utils';
+import { useIdleInfo, Message } from '@/utils';
 import { theme } from '@/theme';
+import { useResponseFunctions } from '@/utils/responseHooks';
 
 export type QuestionWithResponse = {
     question: string;
@@ -16,6 +17,7 @@ export const ChatContainer = () => {
     const [question, setQuestion] = useState<string>('');
     const [isThinking, setIsThinking] = useState<boolean>(false);
     const [questionResponsePairs, setQuestionResponsePairs] = useState<QuestionWithResponse[]>([]);
+    const { getResponse } = useResponseFunctions();
     const handleSubmitQuestion = (submittedQuestion: string) => {
         setIsThinking(true);
         setTimeout(() => onThinkingComplete(submittedQuestion), 2500);
@@ -30,7 +32,7 @@ export const ChatContainer = () => {
     };
 
     const onThinkingComplete = (submittedQuestion: string) => {
-        const response = responseService.getResponse(submittedQuestion);
+        const response = getResponse(submittedQuestion);
         setQuestionResponsePairs([{ question: submittedQuestion, response: response, time: new Date() }, ...questionResponsePairs]);
         setQuestion('');
         setIsThinking(false);

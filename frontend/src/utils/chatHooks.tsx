@@ -1,5 +1,5 @@
-import { responseService } from './responseService';
 import React, { useEffect, useState } from 'react';
+import { useQuestionFunctions } from './questionHooks';
 
 type IdleInfo = {
     isIdle: boolean;
@@ -18,6 +18,7 @@ export const useIdleInfo: (
     setQuestion: (question: string) => void,
     submitQuestion: (question: string) => void
 ) => {
+    const { getAutoQuestion } = useQuestionFunctions();
     const [idleInfo, setIdleInfo] = useState<IdleInfo>({
         isIdle: false,
         lastActionTime: new Date(),
@@ -57,7 +58,7 @@ export const useIdleInfo: (
                     isIdle: true,
                     hasAskedIdleQuestion: false,
                     idleQuestionSubstringCounter: 0,
-                    idleQuestion: responseService.getIdleQuestion(),
+                    idleQuestion: getAutoQuestion(),
                 }));
             }
         }, 1000);
