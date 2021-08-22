@@ -4,14 +4,10 @@
 
 	public class Response
 	{
-		public Response(IEnumerable<IResponsePart> parts, IEnumerable<string> keywords)
-		{
-			this.Parts = parts;
-			this.Keywords = keywords;
-		}
+		public int Id { get; set; }
 
-		public IEnumerable<IResponsePart> Parts { get; }
+		public List<ResponsePartBase> ResponseParts { get; set; }
 
-		public IEnumerable<string> Keywords { get; }
+		public List<Keyword> Keywords { get; set; }
 	}
 }

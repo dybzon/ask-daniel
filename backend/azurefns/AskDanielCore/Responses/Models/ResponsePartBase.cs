@@ -1,14 +1,13 @@
 ﻿namespace AskDanielCore.Responses.Models
 {
-	public abstract class ResponsePartBase : IResponsePart
+	public class ResponsePartBase
 	{
-		public ResponsePartBase(string value)
-		{
-			this.Value = value;
-		}
+		public int Id { get; set; }
 
-		public string Value { get; }
+		public int ResponseId { get; set; }
 
-		public abstract string Type { get; }
+		public string Value { get; set; }
+
+		public string Type { get; set; }
 	}
 }

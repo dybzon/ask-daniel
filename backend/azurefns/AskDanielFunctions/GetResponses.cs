@@ -6,17 +6,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using Microsoft.Extensions.Primitives;
-using AskDanielCore.Responses;
+using AskDanielCore.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace AskDanielFunctions
 {
     public class GetResponses
     {
-		private readonly IResponseRepository responseRepository;
+		private readonly DefaultDbContext dbContext;
 
-		public GetResponses(IResponseRepository responseRepository)
+		public GetResponses(DefaultDbContext dbContext)
 		{
-			this.responseRepository = responseRepository;
+			this.dbContext = dbContext;
 		}
 
         [FunctionName("GetResponses")]
@@ -26,7 +27,10 @@ namespace AskDanielFunctions
             //var calledFromIpAddress = GetIpFromRequestHeaders(req);
             //log.LogInformation($"Function called by IP {calledFromIpAddress}");
 
-            var responses = await this.responseRepository.GetAll();
+            var responses = await this.dbContext.Responses
+                .Include(r => r.Keywords)
+                .Include(r => r.ResponseParts)
+                .ToListAsync();
             return new OkObjectResult(responses);
         }
 
