@@ -6,6 +6,7 @@ import { QuestionsContainer } from './QuestionsContainer';
 import { useIdleInfo, Message } from '@/utils';
 import { theme } from '@/theme';
 import { useResponseFunctions } from '@/utils/responseHooks';
+import { addQuestion } from '@/utils/questionHooks';
 
 export type QuestionWithResponse = {
     question: string;
@@ -20,6 +21,7 @@ export const ChatContainer = () => {
     const { getResponse } = useResponseFunctions();
     const handleSubmitQuestion = (submittedQuestion: string) => {
         setIsThinking(true);
+        addQuestion(submittedQuestion);
         setTimeout(() => onThinkingComplete(submittedQuestion), 2500);
     };
 

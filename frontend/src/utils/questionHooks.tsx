@@ -53,3 +53,16 @@ export const useQuestionFunctions: () => QuestionFunctions = () => {
 };
 
 const fallbackAutoQuestion = 'Har du hørt om Rasmus Dybkjær?';
+
+export const addQuestion = async (question: string): Promise<unknown> => {
+    const url = `${import.meta.env.VITE_AZUREFUNCTIONS_BASE}AddQuestion`;
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question }), // body data type must match "Content-Type" header
+    };
+    const response = await fetch(url, options);
+    return await response.json(); // parses JSON response into native JavaScript objects
+};
