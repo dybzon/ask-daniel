@@ -1,4 +1,4 @@
-var e=Object.defineProperty,t=Object.defineProperties,r=Object.getOwnPropertyDescriptors,n=Object.getOwnPropertySymbols,i=Object.prototype.hasOwnProperty,a=Object.prototype.propertyIsEnumerable,o=(t,r,n)=>r in t?e(t,r,{enumerable:!0,configurable:!0,writable:!0,value:n}):t[r]=n,l=(e,t)=>{for(var r in t||(t={}))i.call(t,r)&&o(e,r,t[r]);if(n)for(var r of n(t))a.call(t,r)&&o(e,r,t[r]);return e},s=(e,n)=>t(e,r(n));import{C as d,q as u,R as c,W as m,a as p}from"./vendor.b8a92f43.js";const f="Har du hørt om Rasmus Dybkjær?",h=(e,t)=>{const{getAutoQuestion:r}=(()=>{const[e,t]=d.exports.useState(),[r,n]=d.exports.useState();return d.exports.useEffect((()=>{e||(async()=>{const e=await fetch("https://ask-daniel.azurewebsites.net/api/GetAutoQuestions");if(e.ok){const r=await e.json();t(r)}})()}),[e,t]),d.exports.useEffect((()=>{r||(async()=>{const e=await fetch("https://ask-daniel.azurewebsites.net/api/GetSuggestedQuestions");if(e.ok){const t=await e.json();n(t)}})()}),[r,n]),{getAutoQuestion:()=>e?e[Math.floor(Math.random()*e.length)]:f,getSuggestedQuestions:()=>null!=r?r:[]}})(),[n,i]=d.exports.useState({isIdle:!1,lastActionTime:new Date,idleQuestionSubstringCounter:0,idleQuestion:"",hasAskedIdleQuestion:!1}),{isIdle:a,lastActionTime:o,idleQuestionSubstringCounter:u,hasAskedIdleQuestion:c,idleQuestion:m}=n;return d.exports.useEffect((()=>{if(!a||c)return;const r=setInterval((()=>{if(u>m.length)return i((e=>s(l({},e),{hasAskedIdleQuestion:!0}))),void t(m);i((e=>s(l({},e),{idleQuestionSubstringCounter:u+1}))),e(m.substring(0,u))}),150);return()=>clearInterval(r)}),[i,e,n]),d.exports.useEffect((()=>{const e=setInterval((()=>{if(a)return;(new Date).getTime()-o.getTime()>3e4&&i((e=>s(l({},e),{isIdle:!0,hasAskedIdleQuestion:!1,idleQuestionSubstringCounter:0,idleQuestion:r()})))}),1e3);return()=>clearInterval(e)}),[i,o,a]),[n,i]},g=e=>Array.isArray(e),x=()=>k[Math.floor(k.length*Math.random())],k=["Det ved jeg sgu ikke noget om.","Hvad er det for noget pis at fyre af?","Det ku du li at vide","Det er satme det dummeste jeg har hørt længe","Hold nu kæft","Spørg om noget andet","Hvorfor spørger du ikke om noget fornuftigt? Du spilder min tid."],b=/[.,/#!$%^&*;:{}=\-_`~()?]/g,w={xs:600,sm:800,md:1e3,lg:1200,xl:1600},y={dark:{primary:{default:"#394053",dark:"#212531",light:"#9DA5BE"},secondary:{default:"#5F985D",dark:"#3F653E",light:"#A8C9A6"},third:{default:"#6E6362",dark:"#363030",light:"#BCB3B3"},white:"#F4F4F4",black:"#101218"},light:{primary:{default:"#394053",dark:"#212531",light:"#9DA5BE"},secondary:{default:"#4E4A59",dark:"#312E38",light:"#A09AAC"},third:{default:"#6E6362",dark:"#363030",light:"#D9D4D4"},white:"#F4F4F4",black:"#101218"}},v=u.a`
+var e=Object.defineProperty,t=Object.defineProperties,r=Object.getOwnPropertyDescriptors,n=Object.getOwnPropertySymbols,i=Object.prototype.hasOwnProperty,a=Object.prototype.propertyIsEnumerable,o=(t,r,n)=>r in t?e(t,r,{enumerable:!0,configurable:!0,writable:!0,value:n}):t[r]=n,s=(e,t)=>{for(var r in t||(t={}))i.call(t,r)&&o(e,r,t[r]);if(n)for(var r of n(t))a.call(t,r)&&o(e,r,t[r]);return e},l=(e,n)=>t(e,r(n));import{C as d,q as u,R as c,W as p,a as m}from"./vendor.b8a92f43.js";const f="Har du hørt om Rasmus Dybkjær?",h=(e,t)=>{const{getAutoQuestion:r}=(()=>{const[e,t]=d.exports.useState(),[r,n]=d.exports.useState();return d.exports.useEffect((()=>{e||(async()=>{const e=await fetch("https://ask-daniel.azurewebsites.net/api/GetAutoQuestions");if(e.ok){const r=await e.json();t(r)}})()}),[e,t]),d.exports.useEffect((()=>{r||(async()=>{const e=await fetch("https://ask-daniel.azurewebsites.net/api/GetSuggestedQuestions");if(e.ok){const t=await e.json();n(t)}})()}),[r,n]),{getAutoQuestion:()=>e?e[Math.floor(Math.random()*e.length)]:f,getSuggestedQuestions:()=>null!=r?r:[]}})(),[n,i]=d.exports.useState({isIdle:!1,lastActionTime:new Date,idleQuestionSubstringCounter:0,idleQuestion:"",hasAskedIdleQuestion:!1}),{isIdle:a,lastActionTime:o,idleQuestionSubstringCounter:u,hasAskedIdleQuestion:c,idleQuestion:p}=n;return d.exports.useEffect((()=>{if(!a||c)return;const r=setInterval((()=>{if(u>p.length)return i((e=>l(s({},e),{hasAskedIdleQuestion:!0}))),void t(p);i((e=>l(s({},e),{idleQuestionSubstringCounter:u+1}))),e(p.substring(0,u))}),150);return()=>clearInterval(r)}),[i,e,n]),d.exports.useEffect((()=>{const e=setInterval((()=>{if(a)return;(new Date).getTime()-o.getTime()>3e4&&i((e=>l(s({},e),{isIdle:!0,hasAskedIdleQuestion:!1,idleQuestionSubstringCounter:0,idleQuestion:r()})))}),1e3);return()=>clearInterval(e)}),[i,o,a]),[n,i]},g=e=>Array.isArray(e),x=()=>k[Math.floor(k.length*Math.random())],k=["Det ved jeg sgu ikke noget om.","Hvad er det for noget pis at fyre af?","Det ku du li at vide","Det er satme det dummeste jeg har hørt længe","Hold nu kæft","Spørg om noget andet","Hvorfor spørger du ikke om noget fornuftigt? Du spilder min tid."],b=/[.,/#!$%^&*;:{}=\-_`~()?]/g,w={xs:600,sm:800,md:1e3,lg:1200,xl:1600},y={dark:{primary:{default:"#394053",dark:"#212531",light:"#9DA5BE"},secondary:{default:"#5F985D",dark:"#3F653E",light:"#A8C9A6"},third:{default:"#6E6362",dark:"#363030",light:"#BCB3B3"},white:"#F4F4F4",black:"#101218"},light:{primary:{default:"#394053",dark:"#212531",light:"#9DA5BE"},secondary:{default:"#4E4A59",dark:"#312E38",light:"#A09AAC"},third:{default:"#6E6362",dark:"#363030",light:"#D9D4D4"},white:"#F4F4F4",black:"#101218"}},v=u.a`
     color: ${y.dark.white};
     text-decoration: none;
     position: relative;
@@ -27,7 +27,7 @@ var e=Object.defineProperty,t=Object.defineProperties,r=Object.getOwnPropertyDes
         transform: rotate(2deg);
         z-index: -1;
     }
-`,E=({messages:e})=>c.createElement(S,null,e.map((e=>c.createElement($,{key:e.time.toString(),messages:e})))),$=({messages:e})=>{const{time:t,response:r,question:n}=e;return c.createElement(c.Fragment,null,c.createElement(j,{time:t,question:n}),c.createElement(A,{time:t,response:r}))},j=({question:e,time:t})=>c.createElement(C,{justifyContent:"flex-start"},c.createElement(D,{backgroundColor:y.dark.secondary.dark},c.createElement(Q,null,z(t),".",F(t)),c.createElement(T,null,e))),A=({response:e,time:t})=>{let r;return r=g(e)?c.createElement(c.Fragment,null,e.map(((e,t)=>"Link"===e.type?c.createElement(v,{href:e.src,key:t,target:"_blank"},e.value):c.createElement(I,{key:t},e.value)))):c.createElement(I,null,e),c.createElement(C,{justifyContent:"flex-end"},c.createElement(D,{backgroundColor:y.dark.third.dark},c.createElement(Q,null,z(t),".",F(t)),c.createElement(T,null,r)))},S=u.div`
+`,E=({messages:e})=>c.createElement(S,null,e.map((e=>c.createElement($,{key:e.time.toString(),messages:e})))),$=({messages:e})=>{const{time:t,response:r,question:n}=e;return c.createElement(c.Fragment,null,c.createElement(j,{time:t,question:n}),c.createElement(A,{time:t,response:r}))},j=({question:e,time:t})=>c.createElement(C,{justifyContent:"flex-start"},c.createElement(Q,{backgroundColor:y.dark.secondary.dark},c.createElement(D,null,O(t),".",z(t)),c.createElement(T,null,e))),A=({response:e,time:t})=>{let r;return r=g(e)?c.createElement(c.Fragment,null,e.map(((e,t)=>"Link"===e.type?c.createElement(v,{href:e.src,key:t,target:"_blank"},e.value):c.createElement(I,{key:t},e.value)))):c.createElement(I,null,e),c.createElement(C,{justifyContent:"flex-end"},c.createElement(Q,{backgroundColor:y.dark.third.dark},c.createElement(D,null,O(t),".",z(t)),c.createElement(T,null,r)))},S=u.div`
     width: 100%;
     height: 100%;
     display: flex;
@@ -37,7 +37,7 @@ var e=Object.defineProperty,t=Object.defineProperties,r=Object.getOwnPropertyDes
     display: flex;
     flex-direction: row;
     justify-content: ${e=>e.justifyContent};
-`,D=u.div`
+`,Q=u.div`
     padding: 4px 12px;
     margin: 4px;
     border-radius: 8px;
@@ -45,10 +45,10 @@ var e=Object.defineProperty,t=Object.defineProperties,r=Object.getOwnPropertyDes
     background-color: ${e=>e.backgroundColor};
     color: ${y.dark.white};
     display: flex;
-`,Q=u.div`
+`,D=u.div`
     width: 50px;
     margin-right: 12px;
-`,T=u.div``,I=u.span``;function z(e){const t=e.getHours();return t<10?`0${t}`:t.toString()}function F(e){const t=e.getMinutes();return t<10?`0${t}`:t.toString()}const O=({response:e})=>{let t;return t=e&&g(e)?c.createElement(c.Fragment,null,e.map(((e,t)=>"Link"===e.type?c.createElement(v,{href:e.src,key:t,target:"_blank"},e.value):c.createElement(R,{key:t},e.value)))):c.createElement(R,null,e),c.createElement(P,null,c.createElement(q,null,c.createElement(M,null,t),c.createElement(K,null)))},P=u.div`
+`,T=u.div``,I=u.span``;function O(e){const t=e.getHours();return t<10?`0${t}`:t.toString()}function z(e){const t=e.getMinutes();return t<10?`0${t}`:t.toString()}const F=({response:e})=>{let t;return t=e&&g(e)?c.createElement(c.Fragment,null,e.map(((e,t)=>"Link"===e.type?c.createElement(v,{href:e.src,key:t,target:"_blank"},e.value):c.createElement(R,{key:t},e.value)))):c.createElement(R,null,e),c.createElement(P,null,c.createElement(q,null,c.createElement(M,null,t),c.createElement(K,null)))},P=u.div`
     flex: 0 1 80%;
     display: flex;
     justify-content: flex-start;
@@ -94,7 +94,7 @@ var e=Object.defineProperty,t=Object.defineProperties,r=Object.getOwnPropertyDes
     height: 90%;
     margin: 0;
     color: ${y.dark.white};
-`,R=u.span``,B=()=>c.createElement(G,null,c.createElement(L,null,c.createElement(_,null,"det er satme et godt spørgsmål...")),c.createElement(X,{sizePct:8,verticalOffset:5,keyframes:H(15)}),c.createElement(X,{sizePct:7,verticalOffset:-30,keyframes:H(10)}),c.createElement(X,{sizePct:5,verticalOffset:0,keyframes:H(5)})),H=e=>m`
+`,R=u.span``,B=()=>c.createElement(G,null,c.createElement(L,null,c.createElement(X,null,"det er satme et godt spørgsmål...")),c.createElement(N,{sizePct:8,verticalOffset:5,keyframes:H(15)}),c.createElement(N,{sizePct:7,verticalOffset:-30,keyframes:H(10)}),c.createElement(N,{sizePct:5,verticalOffset:0,keyframes:H(5)})),H=e=>p`
     0% {
         visibility: hidden;
     }
@@ -144,7 +144,7 @@ var e=Object.defineProperty,t=Object.defineProperties,r=Object.getOwnPropertyDes
         box-shadow: 40px -34px 0 0 ${y.dark.third.default}, -100px 0 0 30px ${y.dark.third.default},
             -150px 10px 0 6px ${y.dark.third.default}, -200px -5px 0 10px ${y.dark.third.default};
     }
-`,X=u.div`
+`,N=u.div`
     flex: 0 0 ${e=>e.sizePct}%;
 
     display: flex;
@@ -164,9 +164,9 @@ var e=Object.defineProperty,t=Object.defineProperties,r=Object.getOwnPropertyDes
 
         top: ${e=>e.verticalOffset}px;
     }
-`,_=u.p`
+`,X=u.p`
     color: ${y.dark.white};
-`;const N=({isThinking:e,lastResponse:t,lastActionTime:r,isAsking:n})=>{const[i,a]=d.exports.useState(!1);return d.exports.useEffect((()=>{const e=new Date,t=n&&e.getTime()-r.getTime()<3e3;if(t!==i&&a(t),!t)return;const o=setTimeout((()=>a(!1)),3e3);return()=>clearTimeout(o)}),[r,i,a,n]),c.createElement(V,null,e?c.createElement(B,null):c.createElement(O,{response:t}),c.createElement(J,null,c.createElement(W,{shouldNod:i})))},V=u.div`
+`;const _=({isThinking:e,lastResponse:t,lastActionTime:r,isAsking:n})=>{const[i,a]=d.exports.useState(!1);return d.exports.useEffect((()=>{const e=new Date,t=n&&e.getTime()-r.getTime()<3e3;if(t!==i&&a(t),!t)return;const o=setTimeout((()=>a(!1)),3e3);return()=>clearTimeout(o)}),[r,i,a,n]),c.createElement(V,null,e?c.createElement(B,null):c.createElement(F,{response:t}),c.createElement(J,null,c.createElement(W,{shouldNod:i})))},V=u.div`
     display: flex;
     flex-direction: row;
     margin-left: 8px;
@@ -238,7 +238,7 @@ var e=Object.defineProperty,t=Object.defineProperties,r=Object.getOwnPropertyDes
     ::placeholder {
         color: ${y.dark.third.light};
     }
-`,re=()=>{const[e,t]=d.exports.useState(""),[r,n]=d.exports.useState(!1),[i,a]=d.exports.useState([]),{getResponse:o}=(()=>{const[e,t]=d.exports.useState();return d.exports.useEffect((()=>{e||(async()=>{const e=await fetch("https://ask-daniel.azurewebsites.net/api/GetResponses");if(e.ok){const r=await e.json();t(r)}})()}),[e,t]),{getResponse:function(t){if(!t)return"";const r=t.replace(b,"").split(" ").map((e=>e.toLowerCase()));if(!e)return x();const n=e.map((e=>s(l({},e),{matchedKeywordCount:e.keywords.filter((e=>r.includes(e))).length}))),i=Math.max(...n.map((e=>e.matchedKeywordCount))),a=n.find((e=>e.matchedKeywordCount===i&&e.matchedKeywordCount>0));return a?a.parts:x()}}})(),u=e=>{n(!0),setTimeout((()=>g(e)),2500)},[m,p]=h(t,u),{lastActionTime:f}=m,g=e=>{const r=o(e);a([{question:e,response:r,time:new Date},...i]),t(""),n(!1)};let k;const w=!!e,y=[...i];return w||r||(k=y.shift()),c.createElement(ne,null,c.createElement(U,{onValueChange:e=>{p((e=>s(l({},e),{isIdle:!1,lastActionTime:new Date}))),t(e)},value:null!=e?e:"",onSubmitQuestion:u,isThinking:r,lastQuestion:null==k?void 0:k.question}),c.createElement(N,{lastActionTime:f,isThinking:r,lastResponse:null==k?void 0:k.response,isAsking:w}),c.createElement(ie,null,c.createElement(E,{messages:y})))},ne=u.div`
+`,re=()=>{const[e,t]=d.exports.useState(""),[r,n]=d.exports.useState(!1),[i,a]=d.exports.useState([]),{getResponse:o}=(()=>{const[e,t]=d.exports.useState();return d.exports.useEffect((()=>{e||(async()=>{const e=await fetch("https://ask-daniel.azurewebsites.net/api/GetResponses");if(e.ok){const r=await e.json();t(r)}})()}),[e,t]),{getResponse:function(t){if(!t)return"";const r=t.replace(b,"").split(" ").map((e=>e.toLowerCase()));if(!e)return x();const n=e.map((e=>l(s({},e),{matchedKeywordCount:e.keywords.filter((e=>r.includes(e))).length}))),i=Math.max(...n.map((e=>e.matchedKeywordCount))),a=n.find((e=>e.matchedKeywordCount===i&&e.matchedKeywordCount>0));return a?a.parts:x()}}})(),u=e=>{n(!0),(async e=>{const t={method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:e})},r=await fetch("https://ask-daniel.azurewebsites.net/api/AddQuestion",t);await r.json()})(e),setTimeout((()=>g(e)),2500)},[p,m]=h(t,u),{lastActionTime:f}=p,g=e=>{const r=o(e);a([{question:e,response:r,time:new Date},...i]),t(""),n(!1)};let k;const w=!!e,y=[...i];return w||r||(k=y.shift()),c.createElement(ne,null,c.createElement(U,{onValueChange:e=>{m((e=>l(s({},e),{isIdle:!1,lastActionTime:new Date}))),t(e)},value:null!=e?e:"",onSubmitQuestion:u,isThinking:r,lastQuestion:null==k?void 0:k.question}),c.createElement(_,{lastActionTime:f,isThinking:r,lastResponse:null==k?void 0:k.response,isAsking:w}),c.createElement(ie,null,c.createElement(E,{messages:y})))},ne=u.div`
     display: grid;
     width: 100%;
     height: 100%;
@@ -286,4 +286,4 @@ var e=Object.defineProperty,t=Object.defineProperties,r=Object.getOwnPropertyDes
         grid-column-end: 3;
         grid-row-start: 2;
     }
-`;function ae(){return c.createElement(re,null)}p.render(c.createElement(c.StrictMode,null,c.createElement(ae,null)),document.getElementById("root"));
+`;function ae(){return c.createElement(re,null)}m.render(c.createElement(c.StrictMode,null,c.createElement(ae,null)),document.getElementById("root"));
