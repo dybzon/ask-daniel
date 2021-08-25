@@ -5,17 +5,17 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Linq;
-using Microsoft.Extensions.Primitives;
 using AskDanielCore.Database;
 using Microsoft.EntityFrameworkCore;
+using AskDanielFunctions.Responses.Models;
 
 namespace AskDanielFunctions
 {
     public class GetResponses
     {
-		private readonly DefaultDbContext dbContext;
+		private readonly SqlDbContext dbContext;
 
-		public GetResponses(DefaultDbContext dbContext)
+		public GetResponses(SqlDbContext dbContext)
 		{
 			this.dbContext = dbContext;
 		}
@@ -24,25 +24,12 @@ namespace AskDanielFunctions
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger log)
         {
-            //var calledFromIpAddress = GetIpFromRequestHeaders(req);
-            //log.LogInformation($"Function called by IP {calledFromIpAddress}");
-
             var responses = await this.dbContext.Responses
                 .Include(r => r.Keywords)
                 .Include(r => r.ResponseParts)
                 .ToListAsync();
+            var mappedResponses = responses.Select(r => r.ToResponse());
             return new OkObjectResult(responses);
-        }
-
-        private static string GetIpFromRequestHeaders(HttpRequest request)
-        {
-            StringValues values;
-            if (request.Headers.TryGetValue("X-Forwarded-For", out values))
-            {
-                return values.FirstOrDefault().Split(new char[] { ',' }).FirstOrDefault().Split(new char[] { ':' }).FirstOrDefault();
-            }
-
-            return "";
         }
     }
 }
