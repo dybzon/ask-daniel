@@ -15,6 +15,6 @@ namespace AskDanielCore.Responses.Models
 		public string Type { get; set; }
 
 		[StringLength(500)]
-		public string Src { get; set; }
+		public string? Src { get; set; }
 	}
 }

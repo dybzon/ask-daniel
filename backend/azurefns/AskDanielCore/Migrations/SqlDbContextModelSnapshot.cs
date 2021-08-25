@@ -145,6 +145,7 @@ namespace AskDanielCore.Migrations
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<string>("Value")
+                                .IsRequired()
                                 .HasColumnType("nvarchar(30)")
                                 .HasMaxLength(30);
 
@@ -281,10 +282,12 @@ namespace AskDanielCore.Migrations
                                 .HasMaxLength(500);
 
                             b1.Property<string>("Type")
+                                .IsRequired()
                                 .HasColumnType("nvarchar(10)")
                                 .HasMaxLength(10);
 
                             b1.Property<string>("Value")
+                                .IsRequired()
                                 .HasColumnType("nvarchar(250)")
                                 .HasMaxLength(250);
 

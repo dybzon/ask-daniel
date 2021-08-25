@@ -41,7 +41,7 @@ namespace AskDanielCore.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ResponseId = table.Column<int>(nullable: false),
-                    Value = table.Column<string>(maxLength: 30, nullable: true)
+                    Value = table.Column<string>(maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,8 +61,8 @@ namespace AskDanielCore.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ResponseId = table.Column<int>(nullable: false),
-                    Value = table.Column<string>(maxLength: 250, nullable: true),
-                    Type = table.Column<string>(maxLength: 10, nullable: true),
+                    Value = table.Column<string>(maxLength: 250, nullable: false),
+                    Type = table.Column<string>(maxLength: 10, nullable: false),
                     Src = table.Column<string>(maxLength: 500, nullable: true)
                 },
                 constraints: table =>
