@@ -26,13 +26,14 @@ namespace AskDanielFunctions.Questions
 
         [FunctionName("AddQuestion")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var input = JsonConvert.DeserializeObject<QuestionInput>(requestBody);
             var calledFromIpAddress = this.ipAddressReader.GetIpFromRequestHeaders(req);
-            this.dbContext.Add(new QuestionDto { Value = input.Question, AskedByIpAddress = calledFromIpAddress });
+            await this.dbContext.AddAsync(new QuestionDto { Value = input.Question, AskedByIpAddress = calledFromIpAddress });
+            await this.dbContext.SaveChangesAsync();
             return new OkObjectResult("Question posted successfully");
         }
     }

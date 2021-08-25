@@ -26,7 +26,7 @@ namespace AskDanielFunctions
         {
             var autoQuestions = await this.dbContext.Questions.Where(q => q.IsAuto).ToListAsync();
             var mappedQuestions = autoQuestions.Select(q => q.ToQuestion());
-            return new OkObjectResult(autoQuestions);
+            return new OkObjectResult(mappedQuestions);
         }
     }
 }
