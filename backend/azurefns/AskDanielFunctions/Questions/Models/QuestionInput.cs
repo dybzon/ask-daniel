@@ -2,6 +2,6 @@
 {
 	public class QuestionInput
 	{
-		public string Question { get; set; }
+		public string Question { get; set; } = string.Empty;
 	}
 }

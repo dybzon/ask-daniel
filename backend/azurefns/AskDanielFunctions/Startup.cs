@@ -4,6 +4,7 @@ using AskDanielCore.Database;
 using Microsoft.EntityFrameworkCore;
 using System;
 using AskDanielFunctions.Utils;
+using AskDanielCore.Utils;
 
 [assembly: FunctionsStartup(typeof(AskDanielFunctions.Startup))]
 
@@ -15,8 +16,11 @@ namespace AskDanielFunctions
         {
             builder.Services.AddDbContext<SqlDbContext>(optsBuilder => optsBuilder.UseSqlServer(this.GetConnectionString()));
             builder.Services.AddScoped<IIpAddressReader, IpAddressReader>();
+            builder.Services.AddScoped<IIdentifierCookieProvider, IdentifierCookieProvider>();
+            builder.Services.AddDanielCoreServices();
         }
 
-        private string GetConnectionString() => Environment.GetEnvironmentVariable("ConnectionStrings:DefaultConnection");
+        private string GetConnectionString() => Environment.GetEnvironmentVariable("ConnectionStrings:DefaultConnection") 
+            ?? throw new ArgumentNullException("No default connection string has been configured");
     }
 }

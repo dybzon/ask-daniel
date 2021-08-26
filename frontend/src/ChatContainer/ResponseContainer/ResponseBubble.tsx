@@ -14,7 +14,7 @@ export const ResponseBubble: (props: Props) => JSX.Element | null = ({ response 
     if (response && isComplexMessage(response)) {
         messageText = (
             <>
-                {response.map((mp, i) =>
+                {response.responseParts.map((mp, i) =>
                     mp.type === 'Link' ? (
                         <ExternalLink href={mp.src} key={i} target="_blank">
                             {mp.value}

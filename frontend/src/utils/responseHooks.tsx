@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Message, Response } from './messageTypes';
+import { Response } from './messageTypes';
 
 type ResponseFunctions = {
-    getResponse: (question: string) => Message;
+    getResponse: (question: string) => Response;
 };
 
 export const useResponseFunctions: () => ResponseFunctions = () => {
@@ -25,11 +25,7 @@ export const useResponseFunctions: () => ResponseFunctions = () => {
         fetchResponses();
     }, [responses, setResponses]);
 
-    function getResponse(question: string): Message {
-        if (!question) {
-            return '';
-        }
-
+    function getResponse(question: string): Response {
         // Find question keywords and match these against response keywords,
         // then return best suitable response, or alternatively a fallback response
         const questionKeywords = question
@@ -50,7 +46,7 @@ export const useResponseFunctions: () => ResponseFunctions = () => {
 
         const highestScore = Math.max(...ratedResponses.map((a) => a.matchedKeywordCount));
         const bestResponse = ratedResponses.find((a) => a.matchedKeywordCount === highestScore && a.matchedKeywordCount > 0);
-        if (bestResponse) return bestResponse.parts;
+        if (bestResponse) return bestResponse;
 
         return getFallbackResponse();
     }
@@ -58,7 +54,13 @@ export const useResponseFunctions: () => ResponseFunctions = () => {
     return { getResponse };
 };
 
-const getFallbackResponse = () => fallbackResponses[Math.floor(fallbackResponses.length * Math.random())];
+const getFallbackResponse = (): Response => {
+    return {
+        id: 0,
+        responseParts: [{ id: 0, value: fallbackResponses[Math.floor(fallbackResponses.length * Math.random())], type: 'String' }],
+        keywords: [],
+    };
+};
 
 const fallbackResponses = [
     'Det ved jeg sgu ikke noget om.',

@@ -15,26 +15,25 @@ namespace AskDanielFunctions
     public class GetSuggestedQuestions
     {
 		private readonly SqlDbContext dbContext;
-		private readonly IIpAddressReader ipAddressReader;
+		private readonly IIdentifierCookieProvider identifierCookieProvider;
 
-		public GetSuggestedQuestions(SqlDbContext dbContext, IIpAddressReader ipAddressReader)
+		public GetSuggestedQuestions(SqlDbContext dbContext, IIdentifierCookieProvider identifierCookieProvider)
 		{
 			this.dbContext = dbContext;
-			this.ipAddressReader = ipAddressReader;
+			this.identifierCookieProvider = identifierCookieProvider;
 		}
 
         [FunctionName("GetSuggestedQuestions")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger log)
         {
-            var calledFromIpAddress = this.ipAddressReader.GetIpFromRequestHeaders(req);
-            log.LogInformation($"Function called by IP {calledFromIpAddress?.ToString()}");
-
+            this.identifierCookieProvider.AddIdentifierCookie(req);
             var suggestedQuestions = await this.dbContext.Questions
                 //.Where(q => q.AskedByIpAddressBytes.Equals(calledFromIpAddress))
+                .Where(q => q.AskedById == null || !q.AskedById.Equals(this.identifierCookieProvider.GetIdentifierCookieGuid(req)))
                 .Where(q => !q.IsAuto)
                 .ToListAsync();
-            var mappedQuestions = suggestedQuestions.Select(q => q.ToQuestion());
+            var mappedQuestions = suggestedQuestions.Select(q => q.Value);
             return new OkObjectResult(mappedQuestions);
         }
     }

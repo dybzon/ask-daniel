@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
 
@@ -17,6 +18,8 @@ namespace AskDanielCore.Questions
 			get { return new IPAddress(this.AskedByIpAddressBytes); }
 			set { this.AskedByIpAddressBytes = value?.GetAddressBytes(); }
 		}
+
+		public Guid? AskedById { get; set; }
 
 		[Required, StringLength(250)]
 		public string Value { get; set; }

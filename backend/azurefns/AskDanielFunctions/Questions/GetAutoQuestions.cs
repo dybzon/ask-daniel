@@ -25,7 +25,7 @@ namespace AskDanielFunctions
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger log)
         {
             var autoQuestions = await this.dbContext.Questions.Where(q => q.IsAuto).ToListAsync();
-            var mappedQuestions = autoQuestions.Select(q => q.ToQuestion());
+            var mappedQuestions = autoQuestions.Select(q => q.Value);
             return new OkObjectResult(mappedQuestions);
         }
     }

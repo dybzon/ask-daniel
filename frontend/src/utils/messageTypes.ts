@@ -1,14 +1,16 @@
 export type MessagePart = {
+    id: number;
     value: string;
     src?: string;
-    type?: 'Link' | 'Text';
+    type: 'Link' | 'String';
 };
 
-export type Message = string | MessagePart[];
+export type Message = Response | string;
 
-export const isComplexMessage = (x: Message): x is MessagePart[] => Array.isArray(x);
+export const isComplexMessage = (x: Message): x is Response => typeof x === 'object';
 
 export type Response = {
-    parts: Message;
+    id: number;
+    responseParts: MessagePart[];
     keywords: string[];
 };

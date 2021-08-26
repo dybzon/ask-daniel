@@ -6,6 +6,7 @@ V1 - development:
 * Custom "daniel" cursor in textarea?
 * Auto-remove un-used import on save?
 * Improve mobile experience. Submitting form is kranky. 
+* Switch to local storage rather than cookies for cross session identification
 
 
 Release:

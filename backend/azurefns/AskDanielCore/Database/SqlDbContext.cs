@@ -6,7 +6,7 @@ namespace AskDanielCore.Database
 {
     public class SqlDbContext : DbContext
     {
-        public SqlDbContext(DbContextOptions<SqlDbContext> options)
+		public SqlDbContext(DbContextOptions<SqlDbContext> options)
             : base(options)
         {
         }
