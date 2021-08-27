@@ -16,7 +16,7 @@ namespace AskDanielFunctions
         {
             builder.Services.AddDbContext<SqlDbContext>(optsBuilder => optsBuilder.UseSqlServer(this.GetConnectionString()));
             builder.Services.AddScoped<IIpAddressReader, IpAddressReader>();
-            builder.Services.AddScoped<IIdentifierCookieProvider, IdentifierCookieProvider>();
+            builder.Services.AddSingleton<IUserIdReader, UserIdReader>();
             builder.Services.AddDanielCoreServices();
         }
 

@@ -17,13 +17,13 @@ namespace AskDanielFunctions.Questions
     {
 		private readonly SqlDbContext dbContext;
 		private readonly IIpAddressReader ipAddressReader;
-		private readonly IIdentifierCookieProvider identifierCookieProvider;
+		private readonly IUserIdReader userIdReader;
 
-		public AddQuestion(SqlDbContext dbContext, IIpAddressReader ipAddressReader, IIdentifierCookieProvider identifierCookieProvider)
+		public AddQuestion(SqlDbContext dbContext, IIpAddressReader ipAddressReader, IUserIdReader userIdReader)
 		{
 			this.dbContext = dbContext;
 			this.ipAddressReader = ipAddressReader;
-			this.identifierCookieProvider = identifierCookieProvider;
+			this.userIdReader = userIdReader;
 		}
 
         [FunctionName("AddQuestion")]
@@ -31,15 +31,15 @@ namespace AskDanielFunctions.Questions
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            this.identifierCookieProvider.AddIdentifierCookie(req);
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var input = JsonConvert.DeserializeObject<QuestionInput>(requestBody);
+            var userUid = this.userIdReader.GetUserId(req, requestBody);
             var calledFromIpAddress = this.ipAddressReader.GetIpFromRequestHeaders(req);
             await this.dbContext.AddAsync(
                 new QuestionDto { 
                     Value = input.Question, 
                     AskedByIpAddress = calledFromIpAddress, 
-                    AskedById = this.identifierCookieProvider.GetIdentifierCookieGuid(req) 
+                    AskedById = userUid,
                 });
             await this.dbContext.SaveChangesAsync();
             return new OkObjectResult("Question posted successfully");

@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
+import { getUserId } from './identificationFuncs';
 
 type QuestionFunctions = {
     getAutoQuestion: () => string;
     getSuggestedQuestions: () => string[];
 };
+
+const userId = getUserId();
 
 export const useQuestionFunctions: () => QuestionFunctions = () => {
     const [autoQuestions, setAutoQuestions] = useState<string[]>();
@@ -32,7 +35,9 @@ export const useQuestionFunctions: () => QuestionFunctions = () => {
         }
 
         const fetchSuggestedQuestions = async () => {
-            const response = await fetch(`${import.meta.env.VITE_AZUREFUNCTIONS_BASE}GetSuggestedQuestions`);
+            const response = await fetch(
+                `${import.meta.env.VITE_AZUREFUNCTIONS_BASE}GetSuggestedQuestions?` + new URLSearchParams({ userId })
+            );
 
             if (response.ok) {
                 const result = (await response.json()) as string[];
@@ -59,7 +64,7 @@ export const addQuestion = async (question: string): Promise<unknown> => {
     const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question }),
+        body: JSON.stringify({ question, userId }),
     };
     const response = await fetch(url, options);
     return await response.json();
