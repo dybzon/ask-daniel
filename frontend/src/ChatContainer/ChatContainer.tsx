@@ -19,9 +19,9 @@ export const ChatContainer = () => {
     const [isThinking, setIsThinking] = useState<boolean>(false);
     const [questionResponsePairs, setQuestionResponsePairs] = useState<QuestionWithResponse[]>([]);
     const { getResponse } = useResponseFunctions();
-    const handleSubmitQuestion = (submittedQuestion: string) => {
+    const handleSubmitQuestion = (submittedQuestion: string, skipSave?: boolean) => {
         setIsThinking(true);
-        addQuestion(submittedQuestion);
+        if (!skipSave) addQuestion(submittedQuestion);
         setTimeout(() => onThinkingComplete(submittedQuestion), 2500);
     };
 

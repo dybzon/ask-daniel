@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { theme } from '@/theme';
+import { QuestionSuggestions } from './QuestionSuggestions';
 
 interface Props {
     onValueChange: (value: string) => void;
-    onSubmitQuestion: (question: string) => void;
+    onSubmitQuestion: (question: string, skipSave?: boolean) => void;
     value: string;
     isThinking: boolean; // Determines whether the oracle is currently thinking. No new questions can be asked while thinking.
     lastQuestion?: string;
@@ -21,6 +22,10 @@ export const QuestionsContainer: (props: Props) => JSX.Element = ({ onValueChang
             onSubmitQuestion(value);
         }
     };
+    const handleSuggestionSelected = (question: string) => {
+        onValueChange(question);
+        onSubmitQuestion(question, true);
+    };
 
     return (
         <BubbleContainer>
@@ -34,6 +39,7 @@ export const QuestionsContainer: (props: Props) => JSX.Element = ({ onValueChang
                     placeholder={lastQuestion}
                     aria-label="Textarea for question input"
                 />
+                <QuestionSuggestions currentQuestion={value} isThinking={isThinking} onSuggestionSelected={handleSuggestionSelected} />
             </Bubble>
         </BubbleContainer>
     );

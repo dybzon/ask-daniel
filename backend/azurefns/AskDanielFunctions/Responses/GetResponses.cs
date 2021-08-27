@@ -29,7 +29,7 @@ namespace AskDanielFunctions
                 .Include(r => r.ResponseParts)
                 .ToListAsync();
             var mappedResponses = responses.Select(r => r.ToResponse());
-            return new OkObjectResult(responses);
+            return new OkObjectResult(mappedResponses);
         }
     }
 }

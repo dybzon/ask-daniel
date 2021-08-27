@@ -8,6 +8,7 @@ using AskDanielCore.Database;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using AskDanielFunctions.Utils;
+using AskDanielFunctions.Questions.Models;
 
 namespace AskDanielFunctions
 {
@@ -37,7 +38,7 @@ namespace AskDanielFunctions
             var userQuestions = await this.dbContext.Questions
                 .Where(q => q.AskedById.Equals(userId))
                 .ToListAsync();
-            var mappedQuestions = userQuestions.Select(q => q.Value);
+            var mappedQuestions = userQuestions.Select(q => q.ToQuestionOuput(userId));
             return new OkObjectResult(mappedQuestions);
         }
     }

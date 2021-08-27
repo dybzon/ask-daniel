@@ -2,11 +2,9 @@ V1 - development:
 * Add more actual responses. Pick from tabular editor video or facebook, or...?
 * Better gif for nodding
 * Make the daniel avator nicer... some sort of border/effect around it? Make it fixed size?
-* Add support for scrolling through previous questions. e.g. ctrl+scroll, or ctrl+up/down?
 * Custom "daniel" cursor in textarea?
 * Auto-remove un-used import on save?
 * Improve mobile experience. Submitting form is kranky. 
-* Switch to local storage rather than cookies for cross session identification
 
 
 Release:

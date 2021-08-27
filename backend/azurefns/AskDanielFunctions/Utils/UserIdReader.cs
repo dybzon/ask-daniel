@@ -6,11 +6,15 @@ namespace AskDanielFunctions.Utils
 {
 	public class UserIdReader : IUserIdReader
 	{
-		public Guid? GetUserId(HttpRequest req, string? requestBody)
+		public Guid? GetUserId(HttpRequest req, string? requestBody = null)
 		{
 			string? userId = req.Query["userId"];
-			dynamic data = JsonConvert.DeserializeObject(requestBody);
-			userId ??= data?.userId;
+
+			if(string.IsNullOrEmpty(userId) && !string.IsNullOrWhiteSpace(requestBody))
+			{
+				dynamic data = JsonConvert.DeserializeObject(requestBody);
+				userId = data?.userId;
+			}
 
 			if (Guid.TryParse(userId, out var userGuid))
 			{

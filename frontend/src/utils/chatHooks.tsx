@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useQuestionFunctions } from './questionHooks';
+import { useAutoQuestion } from './questionHooks';
 
 type IdleInfo = {
     isIdle: boolean;
@@ -11,14 +11,11 @@ type IdleInfo = {
 
 const idleTimeoutSeconds = 30;
 
-export const useIdleInfo: (
+export const useIdleInfo = (
     setQuestion: (question: string) => void,
-    submitQuestion: (question: string) => void
-) => [IdleInfo, React.Dispatch<React.SetStateAction<IdleInfo>>] = (
-    setQuestion: (question: string) => void,
-    submitQuestion: (question: string) => void
-) => {
-    const { getAutoQuestion } = useQuestionFunctions();
+    submitQuestion: (question: string, skipSave?: boolean) => void
+): [IdleInfo, React.Dispatch<React.SetStateAction<IdleInfo>>] => {
+    const getAutoQuestion = useAutoQuestion();
     const [idleInfo, setIdleInfo] = useState<IdleInfo>({
         isIdle: false,
         lastActionTime: new Date(),
@@ -35,7 +32,7 @@ export const useIdleInfo: (
         const idleCounterInterval = setInterval(() => {
             if (idleQuestionSubstringCounter > idleQuestion.length) {
                 setIdleInfo((s) => ({ ...s, hasAskedIdleQuestion: true }));
-                submitQuestion(idleQuestion);
+                submitQuestion(idleQuestion, true);
                 return;
             }
 
